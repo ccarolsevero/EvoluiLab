@@ -11,6 +11,7 @@ const segments: {
 }[] = [
   {
     label: "Advogados",
+    href: "/advogados",
     icon: (
       <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.5">
         <path d="M12 3v3M7 21h10M8.5 9l-3 6h5l-3-6zm7 0l-3 6h5l-3-6z" />

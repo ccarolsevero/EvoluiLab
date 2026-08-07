@@ -14,11 +14,11 @@ export function Logo({
       <span className="font-display text-[1.35rem] font-semibold tracking-tight text-mist sm:text-[1.5rem]">
         evolui
       </span>
-      <span className="relative font-display text-[0.95rem] font-medium tracking-tight text-mist/55 sm:text-[1.05rem]">
+      <span className="relative font-display text-[0.95rem] font-medium tracking-tight text-teal sm:text-[1.05rem]">
         lab
         <span
           aria-hidden
-          className="absolute -bottom-0.5 left-0 h-px w-full bg-mist/70"
+          className="absolute -bottom-0.5 left-0 h-px w-full bg-teal"
         />
       </span>
     </a>

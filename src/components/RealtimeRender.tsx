@@ -220,7 +220,7 @@ export function RealtimeRender() {
         });
 
         if (codeT < 1 || blink) {
-          ctx.fillStyle = "#e8e2d6";
+          ctx.fillStyle = "#c4a574";
           ctx.fillRect(cursorX + 1, cursorY - fontSize + 2, 2, fontSize + 2);
         }
 
@@ -269,7 +269,7 @@ function tokenize(line: string): { text: string; color: string }[] {
     const [full, space, str, kw, fn, punct, ident, num] = m;
     if (space) tokens.push({ text: space, color: "#c8d0d4" });
     else if (str) tokens.push({ text: str, color: "#d6cfc0" });
-    else if (kw) tokens.push({ text: kw, color: "#e8e2d6" });
+    else if (kw) tokens.push({ text: kw, color: "#c4a574" });
     else if (fn) tokens.push({ text: fn, color: "#f3f1ec" });
     else if (punct) tokens.push({ text: punct, color: "#6b6b6b" });
     else if (num) tokens.push({ text: num, color: "#a8a29a" });

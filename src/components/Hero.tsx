@@ -17,7 +17,7 @@ export function Hero() {
     >
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_40%_0%,rgba(240,235,227,0.07),transparent_52%),radial-gradient(ellipse_at_90%_80%,rgba(90,85,75,0.14),transparent_42%),linear-gradient(180deg,#141311_0%,#1a1916_50%,#141311_100%)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_35%_0%,rgba(196,165,116,0.1),transparent_48%),radial-gradient(ellipse_at_90%_80%,rgba(90,85,75,0.16),transparent_42%),linear-gradient(180deg,#141311_0%,#1a1916_50%,#141311_100%)]"
       />
       <div className="grain" />
 
@@ -30,7 +30,9 @@ export function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease }}
             >
-              Sua presença digital evolui. Seu negócio cresce.
+              Sua presença digital{" "}
+              <span className="text-teal">evolui</span>. Seu negócio{" "}
+              <span className="text-teal">cresce</span>.
             </motion.h1>
 
             <motion.p

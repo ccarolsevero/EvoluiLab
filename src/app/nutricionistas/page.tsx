@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { Check } from "lucide-react";
 import { Logo } from "@/components/Logo";
-import { Reveal } from "@/components/Reveal";
+import { Reveal, Stagger, StaggerItem } from "@/components/Reveal";
 
 export const metadata: Metadata = {
   title: "Sites e sistemas para nutricionistas | EvoluiLab",
@@ -36,17 +38,27 @@ const WA_DIAGNOSTICO =
     "Olá! Quero um diagnóstico gratuito do meu site (ou da falta dele) como nutricionista."
   );
 
+const heroFeatures = [
+  "Design exclusivo",
+  "SEO",
+  "WhatsApp",
+  "Agendamento",
+  "Responsivo",
+];
+
 const pains = [
-  "Não tenho um site — ou o que tenho parece amador",
-  "As pessoas não entendem minha especialidade antes de chegar",
-  "Perco pacientes porque o contato e o agendamento são confusos",
-  "Dependo só de indicação e não tenho uma vitrine profissional",
+  "Não tenho um site — ou o que tenho parece amador.",
+  "As pessoas não entendem minha especialidade antes de chegar.",
+  "Perco pacientes porque o contato e o agendamento são confusos.",
+  "Dependo só de indicação e não tenho uma vitrine profissional.",
+  "Meu site não transmite a qualidade do meu atendimento.",
+  "Quero aparecer melhor quando pesquisam meu nome no Google.",
 ];
 
 const solutions = [
   {
     title: "Site com posicionamento",
-    text: "Páginas que apresentam sua especialidade com clareza e autoridade — sem parecer genérica.",
+    text: "Páginas que apresentam sua especialidade com clareza e autoridade — sem parecer genéricas.",
   },
   {
     title: "Landing que converte",
@@ -76,29 +88,25 @@ const includes = [
 const portfolio = [
   {
     name: "Nutri Marina Alves",
-    niche: "Nutrição esportiva",
-    result: "+62% de agendamentos via site",
+    area: "Nutrição esportiva",
     tag: "Landing page",
     image: "/portfolio/portfolio-marina.png",
   },
   {
     name: "Consultório NutriVida",
-    niche: "Emagrecimento saudável",
-    result: "Site + formulário de triagem",
+    area: "Emagrecimento saudável",
     tag: "Site institucional",
     image: "/portfolio/portfolio-nutrivida.png",
   },
   {
     name: "Dra. Camila Rocha",
-    niche: "Nutrição clínica",
-    result: "3x mais contatos qualificados",
+    area: "Nutrição clínica",
     tag: "Site + sistema",
     image: "/portfolio/portfolio-camila.png",
   },
   {
     name: "Espaço Equilíbrio",
-    niche: "Nutrição comportamental",
-    result: "Vitrine profissional e agenda organizada",
+    area: "Nutrição comportamental",
     tag: "Site institucional",
     image: "/portfolio/portfolio-equilibrio.png",
   },
@@ -109,70 +117,51 @@ const testimonials = [
     quote:
       "Meu site antigo não transmitia nada do meu método. Depois da reformulação, os pacientes chegam já entendendo o que eu faço — e pedindo consulta.",
     name: "Marina Alves",
-    role: "Nutricionista esportiva",
+    place: "Nutricionista esportiva",
   },
   {
     quote:
       "Finalmente tenho um site que transmite o cuidado do consultório. Visual, textos e o fluxo de contato fizeram toda a diferença.",
     name: "Camila Rocha",
-    role: "Nutricionista clínica",
+    place: "Nutricionista clínica",
   },
   {
     quote:
       "Antes eu dependia só de indicação. Hoje o site traz pacientes certos e o sistema ajuda a organizar a demanda.",
     name: "Helena Duarte",
-    role: "Nutrição comportamental",
+    place: "Nutrição comportamental",
   },
 ];
 
 const steps = [
   {
     n: "01",
-    title: "Conversa",
+    title: "Conversamos",
     text: "Entendemos sua especialidade, se você precisa de site, sistema ou os dois.",
   },
   {
     n: "02",
-    title: "Criação",
-    text: "Desenvolvemos o site, a landing ou o sistema com foco em clareza e conversão.",
+    title: "Planejamos",
+    text: "Definimos a estrutura ideal para apresentar seus serviços com clareza e autoridade.",
   },
   {
     n: "03",
-    title: "Resultado",
-    text: "Publicamos, testamos e entregamos pronto para gerar e organizar consultas.",
+    title: "Desenvolvemos",
+    text: "Criamos o design, organizamos o conteúdo e desenvolvemos o site ou o sistema.",
+  },
+  {
+    n: "04",
+    title: "Publicamos",
+    text: "Entregamos pronto para gerar consultas, organizar a agenda e fortalecer sua presença.",
   },
 ];
 
-function PortfolioCard({
-  name,
-  niche,
-  result,
-  tag,
-  image,
-}: (typeof portfolio)[number]) {
+function CheckItem({ children }: { children: ReactNode }) {
   return (
-    <article className="group overflow-hidden rounded-xl border border-white/8 bg-ink transition duration-300 hover:-translate-y-1 hover:border-teal/35">
-      <div className="relative aspect-[16/10] overflow-hidden bg-slate/40">
-        <Image
-          src={image}
-          alt={`Preview do site ${name}`}
-          fill
-          sizes="(max-width: 768px) 100vw, 50vw"
-          className="object-cover object-top transition duration-500 group-hover:scale-[1.03]"
-        />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/50 via-transparent to-transparent" />
-      </div>
-      <div className="p-5">
-        <div className="flex items-center justify-between gap-3">
-          <span className="text-[0.7rem] font-bold tracking-[0.14em] text-teal uppercase">
-            {tag}
-          </span>
-          <span className="text-xs text-mist/45">{niche}</span>
-        </div>
-        <h3 className="mt-3 font-display text-lg font-bold">{name}</h3>
-        <p className="mt-2 text-sm font-semibold text-mist/75">{result}</p>
-      </div>
-    </article>
+    <li className="flex gap-3 text-sm leading-relaxed text-mist/70 sm:text-base">
+      <Check className="mt-0.5 size-4 shrink-0 text-teal" strokeWidth={2.2} />
+      <span>{children}</span>
+    </li>
   );
 }
 
@@ -186,7 +175,7 @@ export default function NutricionistasPage() {
             <div className="flex items-center gap-3">
               <Link
                 href="/"
-                className="hidden text-sm text-mist/60 transition hover:text-mist sm:inline"
+                className="hidden text-sm text-mist/55 transition hover:text-mist sm:inline"
               >
                 Voltar ao início
               </Link>
@@ -203,125 +192,133 @@ export default function NutricionistasPage() {
         <section className="relative overflow-hidden pt-28 pb-16 sm:pt-32 sm:pb-24">
           <div
             aria-hidden
-            className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_-10%,rgba(243,241,236,0.08),transparent_48%),linear-gradient(180deg,#141311_0%,#1a1916_100%)]"
+            className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_20%_0%,rgba(196,165,116,0.12),transparent_45%),linear-gradient(180deg,#141311_0%,#1a1916_100%)]"
           />
           <div className="grain" />
           <div className="section-pad relative">
             <div className="container-site max-w-3xl">
-              <p className="rise-in font-display text-sm font-semibold tracking-[0.2em] text-teal uppercase">
-                Para nutricionistas
-              </p>
-              <h1 className="rise-in rise-in-delay-1 mt-4 font-display text-[clamp(2.2rem,5vw,3.8rem)] leading-[1.08] font-extrabold tracking-[-0.03em]">
-                Sites e sistemas para nutricionistas que desejam{" "}
-                <span className="text-teal">crescer com direção</span>
-              </h1>
-              <p className="rise-in rise-in-delay-2 mt-6 max-w-xl text-base leading-relaxed text-mist/70 sm:text-lg">
-                Criamos sites, landing pages e sistemas sob medida — para atrair
-                pacientes certos, transmitir autoridade e organizar sua agenda.
-              </p>
-              <div className="rise-in rise-in-delay-3 mt-9 flex flex-wrap gap-3">
-                <a href={WA} className="btn-primary">
-                  Quero um site profissional
-                </a>
-                <a href="#portfolio" className="btn-ghost">
-                  Ver exemplos
-                </a>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Pains */}
-        <section className="relative border-y border-white/5 bg-surface py-16 sm:py-20">
-          <div className="section-pad">
-            <div className="container-site">
               <Reveal>
-                <h2 className="text-center font-display text-[clamp(1.6rem,3vw,2.4rem)] font-bold tracking-[-0.02em]">
-                  Você se sente assim sobre o seu site?
-                </h2>
-              </Reveal>
-              <ul className="mx-auto mt-10 grid max-w-4xl gap-4 sm:grid-cols-2">
-                {pains.map((pain, i) => (
-                  <Reveal key={pain} as="li" delay={80 + i * 70}>
-                    <div className="rounded-xl border border-white/8 bg-ink/60 px-5 py-5 text-center text-base text-mist/80 italic transition duration-300 hover:-translate-y-0.5 hover:border-teal/25 sm:text-left">
-                      “{pain}”
-                    </div>
-                  </Reveal>
-                ))}
-              </ul>
-              <Reveal delay={200}>
-                <p className="mx-auto mt-10 max-w-2xl text-center text-mist/70">
-                  Se você quer um site (ou sistema) que gera confiança e consultas,{" "}
-                  <span className="text-teal">vamos conversar</span>.
+                <p className="font-display text-[0.7rem] font-medium tracking-[0.22em] text-teal uppercase">
+                  Especialistas em sites e sistemas para nutricionistas
+                </p>
+                <h1 className="mt-5 font-display text-[clamp(2.2rem,5vw,3.8rem)] leading-[1.05] font-medium tracking-[-0.04em]">
+                  Sites e sistemas para nutricionistas que desejam crescer com{" "}
+                  <span className="text-teal">direção</span>
+                </h1>
+                <p className="mt-6 max-w-2xl text-base leading-relaxed text-mist/60 sm:text-lg">
+                  Desenvolvemos sites, landing pages e sistemas sob medida — para
+                  atrair pacientes certos, transmitir autoridade e organizar a
+                  agenda do consultório.
                 </p>
               </Reveal>
+
+              <Reveal delay={100}>
+                <ul className="mt-8 flex flex-wrap gap-x-5 gap-y-3">
+                  {heroFeatures.map((item) => (
+                    <li
+                      key={item}
+                      className="inline-flex items-center gap-2 text-sm text-mist/70"
+                    >
+                      <Check
+                        className="size-3.5 shrink-0 text-teal"
+                        strokeWidth={2.4}
+                      />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </Reveal>
+
+              <Reveal delay={160}>
+                <div className="mt-9 flex flex-wrap gap-3">
+                  <a href={WA} className="btn-primary">
+                    Quero um site profissional
+                  </a>
+                  <a href="#portfolio" className="btn-ghost">
+                    Ver exemplos
+                  </a>
+                </div>
+              </Reveal>
             </div>
           </div>
         </section>
 
-        {/* Free diagnosis */}
-        <section className="relative py-16 sm:py-20">
+        {/* Pains / situations */}
+        <section className="relative border-y border-white/6 bg-surface py-20 sm:py-28">
           <div className="section-pad">
-            <Reveal>
-              <div className="container-site overflow-hidden rounded-2xl border border-white/12 bg-elevated p-8 sm:p-12">
-                <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
-                  <div>
-                    <p className="font-display text-sm font-semibold tracking-[0.2em] text-teal uppercase">
-                      Sem compromisso
-                    </p>
-                    <h2 className="mt-3 font-display text-[clamp(1.7rem,3vw,2.6rem)] font-bold tracking-[-0.02em]">
-                      Diagnóstico gratuito do seu site
-                    </h2>
-                    <p className="mt-4 max-w-xl text-base leading-relaxed text-mist/70">
-                      Analisamos seu site atual — ou a falta dele — e mostramos o
-                      que mudar para gerar mais confiança e consultas. Sem
-                      compromisso.
-                    </p>
-                  </div>
-                  <div className="flex justify-start lg:justify-end">
-                    <a href={WA_DIAGNOSTICO} className="btn-primary">
-                      Solicitar diagnóstico gratuito
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </Reveal>
+            <div className="container-site grid gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16">
+              <Reveal>
+                <p className="font-display text-[0.7rem] font-medium tracking-[0.22em] text-teal uppercase">
+                  Diagnóstico
+                </p>
+                <h2 className="mt-4 font-display text-[clamp(1.8rem,3.5vw,2.8rem)] leading-[1.1] font-medium tracking-[-0.03em]">
+                  Você se identifica com alguma dessas situações?
+                </h2>
+                <p className="mt-5 text-base leading-relaxed text-mist/60">
+                  Se respondeu &quot;sim&quot; para algumas delas, talvez seja o
+                  momento de investir em um site (ou sistema) que represente
+                  melhor o seu consultório.
+                </p>
+                <a href={WA_DIAGNOSTICO} className="btn-ghost mt-8 inline-flex">
+                  Solicitar diagnóstico gratuito
+                </a>
+              </Reveal>
+
+              <Stagger as="ul" className="space-y-3" stagger={0.05}>
+                {pains.map((pain) => (
+                  <StaggerItem key={pain} as="li">
+                    <div className="flex gap-3 border border-white/8 bg-ink px-4 py-4 text-sm leading-relaxed text-mist/75 transition hover:border-teal/30 sm:text-base">
+                      <span className="mt-0.5 flex size-4 shrink-0 items-center justify-center border border-teal/50 text-teal">
+                        <Check className="size-3" strokeWidth={3} />
+                      </span>
+                      {pain}
+                    </div>
+                  </StaggerItem>
+                ))}
+              </Stagger>
+            </div>
           </div>
         </section>
 
         {/* Solutions */}
-        <section className="relative border-y border-white/5 bg-surface py-16 sm:py-24">
+        <section className="relative py-20 sm:py-28">
           <div className="section-pad">
             <div className="container-site">
               <Reveal className="max-w-2xl">
-                <p className="font-display text-sm font-semibold tracking-[0.2em] text-teal uppercase">
+                <p className="font-display text-[0.7rem] font-medium tracking-[0.22em] text-teal uppercase">
                   A solução
                 </p>
-                <h2 className="mt-4 font-display text-[clamp(1.8rem,3.4vw,2.8rem)] font-bold tracking-[-0.02em]">
+                <h2 className="mt-4 font-display text-[clamp(1.8rem,3.5vw,2.8rem)] leading-[1.1] font-medium tracking-[-0.03em]">
                   O que entregamos para o seu consultório
                 </h2>
-                <p className="mt-4 text-mist/70">
+                <p className="mt-5 text-base leading-relaxed text-mist/60">
                   Você não está contratando “um site bonito”. Está contratando
                   uma estrutura digital que vende e organiza o seu atendimento.
                 </p>
               </Reveal>
 
-              <ul className="mt-12 grid gap-4 sm:grid-cols-2">
-                {solutions.map((item, i) => (
-                  <Reveal key={item.title} as="li" delay={100 + i * 80}>
-                    <div className="h-full rounded-xl border border-white/8 bg-ink p-6 transition duration-300 hover:-translate-y-1 hover:border-teal/30">
-                      <h3 className="font-display text-xl font-bold">{item.title}</h3>
-                      <p className="mt-3 text-sm leading-relaxed text-mist/65">
+              <Stagger
+                as="ul"
+                className="mt-12 grid gap-4 sm:grid-cols-2"
+                stagger={0.08}
+              >
+                {solutions.map((item) => (
+                  <StaggerItem key={item.title} as="li">
+                    <article className="h-full border border-white/8 bg-surface p-6 transition hover:border-teal/30">
+                      <h3 className="font-display text-xl font-medium tracking-[-0.02em]">
+                        {item.title}
+                      </h3>
+                      <p className="mt-3 text-sm leading-relaxed text-mist/60">
                         {item.text}
                       </p>
-                    </div>
-                  </Reveal>
+                    </article>
+                  </StaggerItem>
                 ))}
-              </ul>
+              </Stagger>
 
-              <Reveal delay={180}>
-                <div className="mt-10 rounded-xl border border-teal/20 bg-ink/50 p-6 sm:p-8">
-                  <p className="font-display text-xl font-bold sm:text-2xl">
+              <Reveal delay={120}>
+                <div className="mt-10 border border-teal/25 bg-surface px-6 py-8 sm:px-8">
+                  <p className="font-display text-xl font-medium tracking-[-0.02em] sm:text-2xl">
                     Você continua sendo a nutricionista.
                     <br />
                     <span className="text-teal">
@@ -335,17 +332,17 @@ export default function NutricionistasPage() {
         </section>
 
         {/* Includes */}
-        <section className="relative py-16 sm:py-24">
+        <section className="relative border-y border-white/6 bg-surface py-20 sm:py-28">
           <div className="section-pad">
-            <div className="container-site grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+            <div className="container-site grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
               <Reveal>
-                <p className="font-display text-sm font-semibold tracking-[0.2em] text-teal uppercase">
+                <p className="font-display text-[0.7rem] font-medium tracking-[0.22em] text-teal uppercase">
                   Entrega
                 </p>
-                <h2 className="mt-4 font-display text-[clamp(1.8rem,3.4vw,2.8rem)] font-bold tracking-[-0.02em]">
+                <h2 className="mt-4 font-display text-[clamp(1.8rem,3.5vw,2.8rem)] leading-[1.1] font-medium tracking-[-0.03em]">
                   Tudo o que seu site precisa para gerar consultas
                 </h2>
-                <p className="mt-4 text-mist/70">
+                <p className="mt-5 text-base leading-relaxed text-mist/60">
                   Do briefing à publicação — e, quando fizer sentido, sistemas
                   para organizar leads e o fluxo do consultório.
                 </p>
@@ -353,14 +350,9 @@ export default function NutricionistasPage() {
                   Quero um site assim
                 </a>
               </Reveal>
-              <ul className="grid gap-3 sm:grid-cols-2">
-                {includes.map((item, i) => (
-                  <Reveal key={item} as="li" delay={80 + i * 50}>
-                    <div className="flex gap-3 rounded-xl border border-white/5 bg-slate/30 px-4 py-4 text-sm text-mist/80 transition duration-300 hover:border-teal/20">
-                      <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-teal" />
-                      {item}
-                    </div>
-                  </Reveal>
+              <ul className="grid gap-4 sm:grid-cols-2">
+                {includes.map((item) => (
+                  <CheckItem key={item}>{item}</CheckItem>
                 ))}
               </ul>
             </div>
@@ -370,104 +362,153 @@ export default function NutricionistasPage() {
         {/* Portfolio */}
         <section
           id="portfolio"
-          className="relative border-y border-white/5 bg-surface py-16 sm:py-24"
+          className="relative py-20 sm:py-28"
         >
           <div className="section-pad">
             <div className="container-site">
-              <Reveal className="max-w-2xl">
-                <p className="font-display text-sm font-semibold tracking-[0.2em] text-teal uppercase">
-                  Portfólio
+              <Reveal className="max-w-3xl">
+                <p className="font-display text-[0.7rem] font-medium tracking-[0.22em] text-teal uppercase">
+                  Projetos
                 </p>
-                <h2 className="mt-4 font-display text-[clamp(1.8rem,3.4vw,2.8rem)] font-bold tracking-[-0.02em]">
+                <h2 className="mt-4 font-display text-[clamp(1.8rem,3.5vw,2.8rem)] leading-[1.1] font-medium tracking-[-0.03em]">
                   Exemplos de sites e sistemas para nutricionistas
                 </h2>
-                <p className="mt-4 text-mist/70">
+                <p className="mt-5 max-w-2xl text-base leading-relaxed text-mist/60">
                   Projetos no estilo do que criamos — landings, sites
                   institucionais e sistemas pensados para autoridade e agenda.
                 </p>
               </Reveal>
-              <div className="mt-12 grid gap-5 sm:grid-cols-2">
-                {portfolio.map((item, i) => (
-                  <Reveal key={item.name} delay={100 + i * 90}>
-                    <PortfolioCard {...item} />
-                  </Reveal>
+
+              <Stagger
+                as="ul"
+                className="mt-12 grid gap-4 sm:grid-cols-2"
+                stagger={0.08}
+              >
+                {portfolio.map((item) => (
+                  <StaggerItem key={item.name} as="li">
+                    <article className="group overflow-hidden border border-white/8 bg-ink transition hover:border-teal/30">
+                      <div className="relative aspect-[16/10] overflow-hidden bg-slate/40">
+                        <Image
+                          src={item.image}
+                          alt={`Preview do site ${item.name}`}
+                          fill
+                          sizes="(max-width: 768px) 100vw, 50vw"
+                          className="object-cover object-top transition duration-500 group-hover:scale-[1.03]"
+                        />
+                        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/45 via-transparent to-transparent" />
+                      </div>
+                      <div className="p-5">
+                        <p className="text-[0.7rem] font-medium tracking-[0.16em] text-teal uppercase">
+                          {item.tag}
+                        </p>
+                        <h3 className="mt-2 font-display text-lg font-medium tracking-[-0.02em]">
+                          {item.name}
+                        </h3>
+                        <p className="mt-1 text-sm text-mist/50">{item.area}</p>
+                      </div>
+                    </article>
+                  </StaggerItem>
                 ))}
-              </div>
+              </Stagger>
+
+              <Reveal delay={120}>
+                <div className="mt-10">
+                  <a href={WA} className="btn-ghost">
+                    Quero um projeto como esses
+                  </a>
+                </div>
+              </Reveal>
             </div>
           </div>
         </section>
 
         {/* Process */}
-        <section className="relative py-16 sm:py-24">
+        <section className="relative border-y border-white/6 bg-surface py-20 sm:py-28">
           <div className="section-pad">
             <div className="container-site">
-              <Reveal>
-                <h2 className="font-display text-[clamp(1.8rem,3.4vw,2.8rem)] font-bold tracking-[-0.02em]">
+              <Reveal className="max-w-2xl">
+                <p className="font-display text-[0.7rem] font-medium tracking-[0.22em] text-teal uppercase">
+                  Como funciona
+                </p>
+                <h2 className="mt-4 font-display text-[clamp(1.8rem,3.5vw,2.8rem)] leading-[1.1] font-medium tracking-[-0.03em]">
                   Um caminho claro até o resultado
                 </h2>
               </Reveal>
-              <ol className="mt-12 grid gap-6 sm:grid-cols-3">
-                {steps.map((step, i) => (
-                  <Reveal key={step.n} as="li" delay={100 + i * 100}>
-                    <span className="font-display text-sm font-bold text-teal">
+
+              <Stagger
+                as="ol"
+                className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
+                stagger={0.08}
+              >
+                {steps.map((step) => (
+                  <StaggerItem key={step.n} as="li">
+                    <span className="font-display text-[0.7rem] font-medium tracking-[0.18em] text-teal uppercase">
                       {step.n}
                     </span>
-                    <h3 className="mt-3 font-display text-xl font-bold">
+                    <h3 className="mt-3 font-display text-xl font-medium tracking-[-0.02em]">
                       {step.title}
                     </h3>
-                    <p className="mt-2 text-sm leading-relaxed text-mist/65">
+                    <p className="mt-2 text-sm leading-relaxed text-mist/60">
                       {step.text}
                     </p>
-                  </Reveal>
+                  </StaggerItem>
                 ))}
-              </ol>
+              </Stagger>
             </div>
           </div>
         </section>
 
         {/* Testimonials */}
-        <section className="relative border-y border-white/5 bg-surface py-16 sm:py-24">
+        <section className="relative py-20 sm:py-28">
           <div className="section-pad">
             <div className="container-site">
               <Reveal className="max-w-2xl">
-                <p className="font-display text-sm font-semibold tracking-[0.2em] text-teal uppercase">
+                <p className="font-display text-[0.7rem] font-medium tracking-[0.22em] text-teal uppercase">
                   Depoimentos
                 </p>
-                <h2 className="mt-4 font-display text-[clamp(1.8rem,3.4vw,2.8rem)] font-bold tracking-[-0.02em]">
-                  Nutricionistas que evoluíram com um site profissional
+                <h2 className="mt-4 font-display text-[clamp(1.8rem,3.5vw,2.8rem)] leading-[1.1] font-medium tracking-[-0.03em]">
+                  O que nossas clientes dizem
                 </h2>
               </Reveal>
-              <ul className="mt-12 grid gap-5 lg:grid-cols-3">
-                {testimonials.map((item, i) => (
-                  <Reveal key={item.name} as="li" delay={120 + i * 90}>
-                    <div className="flex h-full flex-col rounded-xl border border-white/8 bg-ink p-6 transition duration-300 hover:-translate-y-1 hover:border-teal/25">
-                      <p className="flex-1 text-base leading-relaxed text-mist/80">
+
+              <Stagger
+                as="ul"
+                className="mt-12 grid gap-4 lg:grid-cols-3"
+                stagger={0.08}
+              >
+                {testimonials.map((item) => (
+                  <StaggerItem key={item.name} as="li">
+                    <article className="flex h-full flex-col border border-white/8 bg-surface p-6 transition hover:border-teal/25">
+                      <p className="text-teal" aria-hidden>
+                        ★★★★★
+                      </p>
+                      <p className="mt-4 flex-1 text-base leading-relaxed text-mist/75">
                         “{item.quote}”
                       </p>
                       <div className="mt-8 border-t border-white/8 pt-5">
-                        <p className="font-display font-bold">{item.name}</p>
-                        <p className="mt-1 text-sm text-mist/55">{item.role}</p>
+                        <p className="font-display font-medium">{item.name}</p>
+                        <p className="mt-1 text-sm text-mist/50">{item.place}</p>
                       </div>
-                    </div>
-                  </Reveal>
+                    </article>
+                  </StaggerItem>
                 ))}
-              </ul>
+              </Stagger>
             </div>
           </div>
         </section>
 
         {/* Final CTA */}
-        <section className="relative overflow-hidden py-20 sm:py-28">
+        <section className="relative overflow-hidden border-t border-white/6 py-20 sm:py-28">
           <div
             aria-hidden
-            className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(243,241,236,0.18),transparent_50%)]"
+            className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(196,165,116,0.12),transparent_50%)]"
           />
           <div className="section-pad relative">
             <Reveal className="container-site max-w-3xl text-center">
-              <h2 className="font-display text-[clamp(1.9rem,3.8vw,3rem)] font-bold tracking-[-0.02em]">
+              <h2 className="font-display text-[clamp(1.9rem,3.8vw,3rem)] leading-[1.1] font-medium tracking-[-0.03em]">
                 Vamos criar o site (ou sistema) do seu consultório
               </h2>
-              <p className="mx-auto mt-5 max-w-xl text-mist/70">
+              <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-mist/60">
                 Se você quer uma estrutura digital que atrai pacientes certos,
                 transmite autoridade e organiza a operação, a EvoluiLab está
                 pronta para construir isso com você.
@@ -485,13 +526,37 @@ export default function NutricionistasPage() {
         </section>
       </main>
 
-      <footer className="border-t border-white/5 bg-ink py-10">
+      <footer className="border-t border-white/6 bg-ink py-14">
         <div className="section-pad">
-          <div className="container-site flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <Logo href="/" />
-            <p className="text-sm text-mist/45">
-              Sites e sistemas para nutricionistas · EvoluiLab
-            </p>
+          <div className="container-site grid gap-10 sm:grid-cols-[1.2fr_0.8fr]">
+            <div>
+              <Logo href="/" />
+              <p className="mt-4 max-w-md text-sm leading-relaxed text-mist/50">
+                Especialistas em sites, landing pages e sistemas para
+                nutricionistas. Projetos exclusivos para consultórios que desejam
+                transmitir mais autoridade, atrair pacientes certos e organizar a
+                agenda.
+              </p>
+            </div>
+            <div className="sm:text-right">
+              <a
+                href={WA}
+                className="block text-sm text-mist/55 transition hover:text-teal"
+              >
+                WhatsApp
+              </a>
+              <a
+                href="mailto:contato@evoluilab.com.br"
+                className="mt-2 block text-sm text-mist/55 transition hover:text-teal"
+              >
+                E-mail
+              </a>
+              <p className="mt-2 text-sm text-mist/35">Política de Privacidade</p>
+              <p className="mt-1 text-sm text-mist/35">Termos de Uso</p>
+            </div>
+          </div>
+          <div className="container-site mt-10 border-t border-white/6 pt-6 text-xs text-mist/35">
+            © {new Date().getFullYear()} EvoluiLab — Todos os direitos reservados.
           </div>
         </div>
       </footer>
