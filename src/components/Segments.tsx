@@ -21,6 +21,7 @@ const segments: {
   },
   {
     label: "Médicos",
+    href: "/medicos",
     icon: (
       <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.5">
         <path d="M12 4v16M8 8h8" />
@@ -30,6 +31,7 @@ const segments: {
   },
   {
     label: "Dentistas",
+    href: "/dentistas",
     icon: (
       <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.5">
         <path d="M8 4c-2 0-3.5 2-3.5 4.5C4.5 13 7 16 8 20c.4-1.5 1-3 2-3s1.6 1.5 2 3c1-4 3.5-7 3.5-11.5C15.5 6 14 4 12 4c-1 0-1.5.5-2 1-.5-.5-1-1-2-1z" />
@@ -38,6 +40,7 @@ const segments: {
   },
   {
     label: "Psicólogos",
+    href: "/psicologos",
     icon: (
       <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.5">
         <path d="M12 4c-3 2-5 5-5 8a5 5 0 0 0 10 0c0-3-2-6-5-8z" />
@@ -57,6 +60,7 @@ const segments: {
   },
   {
     label: "Arquitetos",
+    href: "/arquitetos",
     icon: (
       <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.5">
         <path d="M4 20h16M6 20V9l6-5 6 5v11" />
@@ -66,6 +70,7 @@ const segments: {
   },
   {
     label: "Consultores",
+    href: "/consultores",
     icon: (
       <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.5">
         <circle cx="9" cy="9" r="3.5" />
@@ -75,6 +80,7 @@ const segments: {
   },
   {
     label: "Clínicas",
+    href: "/clinicas",
     icon: (
       <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.5">
         <path d="M12 4v16M8 8h8M7 21h10" />
