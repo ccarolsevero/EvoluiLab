@@ -515,30 +515,6 @@ export default function AdvogadosPage() {
           </div>
         </section>
 
-        {/* Manifesto */}
-        <section className="relative border-y border-white/6 bg-surface py-20 sm:py-28">
-          <div className="section-pad">
-            <Reveal className="container-site max-w-3xl">
-              <p className="font-display text-[0.7rem] font-medium tracking-[0.22em] text-teal uppercase">
-                Nossa visão
-              </p>
-              <h2 className="mt-4 font-display text-[clamp(1.8rem,3.5vw,2.8rem)] leading-[1.1] font-medium tracking-[-0.03em]">
-                Sites feitos para transmitir credibilidade
-              </h2>
-              <p className="mt-5 text-base leading-relaxed text-mist/60">
-                Um site não deve existir só para dizer que o escritório está na
-                internet. Ele precisa transmitir a mesma credibilidade de uma
-                reunião com o cliente.
-              </p>
-              <p className="mt-4 text-base leading-relaxed text-mist/60">
-                Sem modelos prontos e sem layouts genéricos: cada projeto
-                apresenta o escritório com clareza, organização e
-                profissionalismo.
-              </p>
-            </Reveal>
-          </div>
-        </section>
-
         {/* Features */}
         <section className="relative py-20 sm:py-28">
           <div className="section-pad">
