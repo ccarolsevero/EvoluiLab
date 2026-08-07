@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { AdminNav } from "@/components/admin/AdminNav";
+import { getCashSummary } from "@/lib/cash-summary";
 import { prisma } from "@/lib/db";
 import { formatCurrency } from "@/lib/format";
 import {
@@ -11,8 +12,9 @@ import {
 export const dynamic = "force-dynamic";
 
 export default async function AdminDashboardPage() {
-  const [costs, clients, costAgg, clientAgg] = await Promise.all([
+  const [costs, clients, cash] = await Promise.all([
     prisma.costEntry.findMany({
+      where: { relatedCostId: null },
       orderBy: { paymentDate: "desc" },
       take: 5,
     }),
@@ -20,21 +22,8 @@ export default async function AdminDashboardPage() {
       orderBy: { hireDate: "desc" },
       take: 5,
     }),
-    prisma.costEntry.groupBy({
-      by: ["type"],
-      _sum: { amount: true },
-      _count: true,
-    }),
-    prisma.client.aggregate({
-      _sum: { totalValue: true },
-      _count: true,
-    }),
+    getCashSummary(),
   ]);
-
-  const totalCosts = costAgg.reduce((s, row) => s + (row._sum.amount || 0), 0);
-  const byType = Object.fromEntries(
-    costAgg.map((row) => [row.type, row._sum.amount || 0])
-  );
 
   return (
     <>
@@ -47,21 +36,52 @@ export default async function AdminDashboardPage() {
           Painel administrativo
         </h1>
 
-        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <StatCard label="Total de custos" value={formatCurrency(totalCosts)} />
-          <StatCard
-            label="Pró-labore"
-            value={formatCurrency(byType.PROLABORE || 0)}
-          />
-          <StatCard
-            label="Fundo de caixa"
-            value={formatCurrency(byType.FUNDO_CAIXA || 0)}
-          />
-          <StatCard
-            label="Clientes / valor"
-            value={`${clientAgg._count} · ${formatCurrency(clientAgg._sum.totalValue || 0)}`}
-          />
-        </div>
+        <section className="mt-8 border border-teal/25 bg-surface p-5 sm:p-6">
+          <h2 className="font-display text-xl font-medium">Caixa da empresa</h2>
+          <p className="mt-1 text-sm text-mist/50">
+            Em caixa considera receitas já recebidas menos despesas pagas. O
+            previsto já desconta todas as despesas pendentes/atrasadas e soma
+            valores ainda a receber.
+          </p>
+
+          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <StatCard
+              label="Em caixa agora"
+              value={formatCurrency(cash.emCaixa)}
+              emphasize
+            />
+            <StatCard
+              label="Saldo previsto"
+              value={formatCurrency(cash.saldoPrevisto)}
+              emphasize
+            />
+            <StatCard
+              label="Despesas previstas"
+              value={formatCurrency(cash.despesasPrevistas)}
+              hint={`${cash.counts.despesasPrevistas} lançamento(s)`}
+            />
+            <StatCard
+              label="A receber (clientes)"
+              value={formatCurrency(cash.receitasPrevistas)}
+              hint={`${cash.counts.clientesPendentes} cliente(s)`}
+            />
+          </div>
+
+          <div className="mt-4 grid gap-3 sm:grid-cols-3">
+            <MiniStat
+              label="Receitas confirmadas"
+              value={formatCurrency(cash.receitasConfirmadas)}
+            />
+            <MiniStat
+              label="Despesas já pagas"
+              value={formatCurrency(cash.despesasPagas)}
+            />
+            <MiniStat
+              label="Baixas no fundo de caixa"
+              value={formatCurrency(cash.baixasCaixa)}
+            />
+          </div>
+        </section>
 
         <div className="mt-10 grid gap-8 lg:grid-cols-2">
           <section className="border border-white/8 bg-surface p-5">
@@ -135,15 +155,41 @@ export default async function AdminDashboardPage() {
   );
 }
 
-function StatCard({ label, value }: { label: string; value: string }) {
+function StatCard({
+  label,
+  value,
+  hint,
+  emphasize,
+}: {
+  label: string;
+  value: string;
+  hint?: string;
+  emphasize?: boolean;
+}) {
   return (
-    <div className="border border-white/8 bg-surface p-5">
+    <div
+      className={`border p-5 ${
+        emphasize ? "border-teal/35 bg-ink/50" : "border-white/8 bg-ink/30"
+      }`}
+    >
       <p className="text-[0.7rem] tracking-[0.16em] text-mist/40 uppercase">
         {label}
       </p>
       <p className="mt-3 font-display text-2xl font-medium tracking-[-0.02em] text-teal">
         {value}
       </p>
+      {hint && <p className="mt-1 text-xs text-mist/40">{hint}</p>}
+    </div>
+  );
+}
+
+function MiniStat({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="border border-white/6 px-4 py-3">
+      <p className="text-[0.65rem] tracking-[0.14em] text-mist/40 uppercase">
+        {label}
+      </p>
+      <p className="mt-1 text-sm text-mist/75">{value}</p>
     </div>
   );
 }

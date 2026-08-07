@@ -7,6 +7,7 @@ import {
   PAID_BY_OPTIONS,
   PAYMENT_STATUS_OPTIONS,
 } from "@/lib/admin-labels";
+import { getCashSummary } from "@/lib/cash-summary";
 import { prisma } from "@/lib/db";
 import { formatCurrency } from "@/lib/format";
 import type { CostType, PaidBy, PaymentStatus, Prisma } from "@/generated/prisma";
@@ -60,7 +61,7 @@ export default async function CustosPage({
     ],
   };
 
-  const [items, totals] = await Promise.all([
+  const [items, totals, cash] = await Promise.all([
     prisma.costEntry.findMany({
       where,
       orderBy: { paymentDate: "desc" },
@@ -70,6 +71,7 @@ export default async function CustosPage({
       where,
       _sum: { amount: true },
     }),
+    getCashSummary(),
   ]);
 
   const total = totals.reduce((s, row) => s + (row._sum.amount || 0), 0);
@@ -95,18 +97,39 @@ export default async function CustosPage({
           </Link>
         </div>
 
-        <div className="mt-6 grid gap-3 sm:grid-cols-4">
+        <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <TotalChip
+            label="Em caixa agora"
+            value={formatCurrency(cash.emCaixa)}
+            highlight
+          />
+          <TotalChip
+            label="Saldo previsto"
+            value={formatCurrency(cash.saldoPrevisto)}
+            highlight
+          />
+          <TotalChip
+            label="Despesas previstas"
+            value={formatCurrency(cash.despesasPrevistas)}
+          />
+          <TotalChip
+            label="Despesas já pagas"
+            value={formatCurrency(cash.despesasPagas)}
+          />
+        </div>
+
+        <div className="mt-3 grid gap-3 sm:grid-cols-4">
           <TotalChip label="Total filtrado" value={formatCurrency(total)} />
           <TotalChip
-            label="Custos"
+            label="Custos (filtro)"
             value={formatCurrency(byType.CUSTO || 0)}
           />
           <TotalChip
-            label="Pró-labore"
+            label="Pró-labore (filtro)"
             value={formatCurrency(byType.PROLABORE || 0)}
           />
           <TotalChip
-            label="Fundo de caixa"
+            label="Fundo de caixa (filtro)"
             value={formatCurrency(byType.FUNDO_CAIXA || 0)}
           />
         </div>
@@ -215,9 +238,21 @@ export default async function CustosPage({
   );
 }
 
-function TotalChip({ label, value }: { label: string; value: string }) {
+function TotalChip({
+  label,
+  value,
+  highlight,
+}: {
+  label: string;
+  value: string;
+  highlight?: boolean;
+}) {
   return (
-    <div className="border border-white/8 bg-surface px-4 py-3">
+    <div
+      className={`border px-4 py-3 ${
+        highlight ? "border-teal/35 bg-surface" : "border-white/8 bg-surface"
+      }`}
+    >
       <p className="text-[0.65rem] tracking-[0.14em] text-mist/40 uppercase">
         {label}
       </p>
