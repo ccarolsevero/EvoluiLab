@@ -41,21 +41,19 @@ const heroFeatures = [
 
 const situations = [
   "Ainda não tenho um site profissional.",
-  "Meu site está antigo e já não representa a qualidade do meu trabalho.",
-  "Quando pesquisam meu nome no Google, encontram poucas informações sobre mim.",
-  "Meu escritório depende quase exclusivamente de indicações.",
-  "Gostaria que meu escritório transmitisse mais credibilidade.",
-  "Quero facilitar o contato de quem procura meus serviços.",
-  "Vejo outros escritórios com uma apresentação muito mais profissional.",
-  "Quero aparecer melhor nas pesquisas do Google.",
+  "Meu site está antigo e não representa meu trabalho.",
+  "Quase não apareço quando pesquisam meu nome no Google.",
+  "Dependo quase só de indicações.",
+  "Quero transmitir mais credibilidade online.",
+  "Quero facilitar o contato de novos clientes.",
 ];
 
 const firstImpression = [
-  "Quais são suas áreas de atuação.",
-  "Como entrar em contato.",
-  "Onde seu escritório está localizado.",
-  "Quem é o profissional que irá atendê-la.",
-  "Que existe um escritório sério por trás daquele nome.",
+  "Áreas de atuação",
+  "Como entrar em contato",
+  "Localização do escritório",
+  "Quem irá atendê-la",
+  "Um escritório sério e organizado",
 ];
 
 const searchTerms = [
@@ -68,10 +66,10 @@ const searchTerms = [
 ];
 
 const adsHow = [
-  "Criamos campanhas segmentadas para as áreas de atuação do seu escritório.",
-  "Seus anúncios aparecem para pessoas que estão pesquisando por um advogado.",
-  "Direcionamos essas pessoas para uma landing page criada para transmitir credibilidade e facilitar o contato.",
-  "Acompanhamos os resultados e realizamos melhorias contínuas para aproveitar melhor o investimento.",
+  "Campanhas segmentadas para suas áreas de atuação.",
+  "Anúncios para quem já pesquisa por um advogado.",
+  "Landing page pensada para credibilidade e contato.",
+  "Acompanhamento e ajustes contínuos da campanha.",
 ];
 
 const siteFeatures = [
@@ -85,35 +83,34 @@ const siteFeatures = [
   "WhatsApp Integrado",
   "Google Maps",
   "Blog Jurídico",
-  "Área para Artigos",
   "Perguntas Frequentes",
   "SEO",
   "Landing Pages",
   "Site Responsivo",
   "Alta Performance",
-  "Estrutura preparada para Google Ads",
+  "Pronto para Google Ads",
 ];
 
 const steps = [
   {
     n: "01",
     title: "Conversamos",
-    text: "Entendemos sua área de atuação, seu escritório e os objetivos do projeto.",
+    text: "Entendemos sua área, o escritório e o objetivo do projeto.",
   },
   {
     n: "02",
     title: "Planejamos",
-    text: "Definimos a estrutura ideal para apresentar seus serviços de forma clara e profissional.",
+    text: "Definimos a estrutura ideal para apresentar seus serviços.",
   },
   {
     n: "03",
     title: "Desenvolvemos",
-    text: "Criamos o design, organizamos o conteúdo e desenvolvemos todo o site.",
+    text: "Criamos o design, o conteúdo e o site completo.",
   },
   {
     n: "04",
     title: "Publicamos",
-    text: "Seu novo site fica pronto para receber visitantes vindos do Google, indicações e demais canais.",
+    text: "Seu site fica no ar, pronto para receber novos contatos.",
   },
 ];
 
@@ -159,19 +156,19 @@ const portfolio = [
 const testimonials = [
   {
     quote:
-      "A EvoluiLab conseguiu transformar nosso escritório em uma presença digital muito mais profissional. Hoje temos orgulho de apresentar nosso site aos clientes.",
+      "Transformaram a presença digital do nosso escritório. Hoje temos orgulho de apresentar o site aos clientes.",
     name: "Dr. Ricardo Mendes",
     place: "São Paulo • SP",
   },
   {
     quote:
-      "O projeto ficou exatamente como imaginávamos. Um site elegante, rápido e muito fácil de navegar.",
+      "O projeto ficou elegante, rápido e fácil de navegar — exatamente como imaginávamos.",
     name: "Dra. Camila Souza",
     place: "Curitiba • PR",
   },
   {
     quote:
-      "Além do design, recebemos orientação sobre a melhor forma de apresentar nosso escritório e nossas áreas de atuação.",
+      "Além do design, orientaram a melhor forma de apresentar o escritório e as áreas de atuação.",
     name: "Dr. Felipe Andrade",
     place: "Belo Horizonte • MG",
   },
@@ -228,14 +225,14 @@ export default function AdvogadosPage() {
             <div className="container-site">
               <div className="max-w-3xl">
               <Reveal>
-                <h1 className="font-display text-[clamp(2.2rem,5vw,3.8rem)] leading-[1.05] font-medium tracking-[-0.04em]">
+                <p className="font-display text-[0.7rem] font-medium tracking-[0.22em] text-teal uppercase">
                   Especialistas em sites para advogados
-                </h1>
-                <p className="mt-5 max-w-2xl text-lg leading-relaxed text-mist/75 sm:text-xl">
+                </p>
+                <h1 className="mt-5 font-display text-[clamp(2.2rem,5vw,3.8rem)] leading-[1.05] font-medium tracking-[-0.04em]">
                   Seu escritório merece um site que transmita autoridade e gere
                   mais oportunidades de negócio.
-                </p>
-                <p className="mt-5 max-w-2xl text-base leading-relaxed text-mist/60 sm:text-lg">
+                </h1>
+                <p className="mt-6 max-w-2xl text-base leading-relaxed text-mist/60 sm:text-lg">
                   Desenvolvemos sites e landing pages exclusivos para advogados
                   que desejam apresentar seus serviços com mais profissionalismo,
                   aparecer melhor no Google e facilitar o contato de clientes em
