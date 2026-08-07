@@ -204,12 +204,11 @@ export default function NutricionistasPage() {
               priority
               quality={95}
               sizes="100vw"
-              className="object-cover object-[88%_top] sm:object-[80%_8%]"
+              className="object-cover object-[82%_center] sm:object-[78%_center]"
             />
-            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(20,19,17,0.95)_0%,rgba(20,19,17,0.8)_36%,rgba(20,19,17,0.28)_68%,rgba(20,19,17,0.38)_100%)]" />
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_18%_0%,rgba(196,165,116,0.12),transparent_45%),linear-gradient(180deg,rgba(20,19,17,0.2)_0%,rgba(20,19,17,0.68)_100%)]" />
+            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(20,19,17,0.92)_0%,rgba(20,19,17,0.72)_34%,rgba(20,19,17,0.18)_62%,rgba(20,19,17,0.12)_100%)]" />
+            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(20,19,17,0.12)_0%,rgba(20,19,17,0.35)_100%)]" />
           </div>
-          <div className="grain" />
           <div className="section-pad relative">
             <div className="container-site">
               <div className="max-w-3xl">
