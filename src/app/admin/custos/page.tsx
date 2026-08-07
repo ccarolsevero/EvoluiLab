@@ -115,7 +115,8 @@ export default async function CustosPage({
           <h2 className="font-display text-xl font-medium">Novo lançamento</h2>
           <p className="mt-1 text-sm text-mist/50">
             Inclui custos, pró-labore (Luana, Andressa, Ana Carolina) e fundo de
-            caixa.
+            caixa. Ao marcar um custo ou pró-labore como <strong>Pago</strong>, a
+            baixa no fundo de caixa é gerada automaticamente.
           </p>
           <div className="mt-4">
             <CostForm />

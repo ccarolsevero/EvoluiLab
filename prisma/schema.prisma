@@ -46,8 +46,14 @@ model CostEntry {
   paidBy        PaidBy
   type          CostType      @default(CUSTO)
   observation   String        @default("")
+  /// Se preenchido, este lançamento é a baixa automática no caixa ligada a outro custo/pró-labore
+  relatedCostId String?
+  relatedCost   CostEntry?    @relation("CashWriteOff", fields: [relatedCostId], references: [id], onDelete: Cascade)
+  cashWriteOffs CostEntry[]   @relation("CashWriteOff")
   createdAt     DateTime      @default(now())
   updatedAt     DateTime      @updatedAt
+
+  @@index([relatedCostId])
 }
 
 model Client {

@@ -43,6 +43,47 @@ export async function logoutAction() {
   redirect("/admin/login");
 }
 
+async function syncCashWriteOff(sourceId: string) {
+  const source = await prisma.costEntry.findUnique({ where: { id: sourceId } });
+  if (!source) return;
+
+  // Baixas do próprio fundo de caixa não geram outra baixa
+  if (source.type === "FUNDO_CAIXA" || source.relatedCostId) {
+    return;
+  }
+
+  const existing = await prisma.costEntry.findFirst({
+    where: { relatedCostId: source.id, type: "FUNDO_CAIXA" },
+  });
+
+  if (source.paymentStatus === "PAGO") {
+    const payload = {
+      amount: source.amount,
+      description: `Baixa no caixa: ${source.description}`,
+      paymentDate: source.paymentDate,
+      paymentStatus: "PAGO" as PaymentStatus,
+      paidBy: source.paidBy,
+      type: "FUNDO_CAIXA" as CostType,
+      observation: `Baixa automática do lançamento (${source.type}).`,
+      relatedCostId: source.id,
+    };
+
+    if (existing) {
+      await prisma.costEntry.update({
+        where: { id: existing.id },
+        data: payload,
+      });
+    } else {
+      await prisma.costEntry.create({ data: payload });
+    }
+    return;
+  }
+
+  if (existing) {
+    await prisma.costEntry.delete({ where: { id: existing.id } });
+  }
+}
+
 export async function createCostAction(formData: FormData) {
   await requireAdmin();
 
@@ -58,7 +99,7 @@ export async function createCostAction(formData: FormData) {
     return { ok: false as const, error: "Preencha valor, descrição e data." };
   }
 
-  await prisma.costEntry.create({
+  const created = await prisma.costEntry.create({
     data: {
       amount,
       description,
@@ -69,6 +110,8 @@ export async function createCostAction(formData: FormData) {
       observation,
     },
   });
+
+  await syncCashWriteOff(created.id);
 
   revalidatePath("/admin");
   revalidatePath("/admin/custos");
@@ -90,6 +133,19 @@ export async function updateCostAction(formData: FormData) {
     return { ok: false as const, error: "Dados inválidos." };
   }
 
+  const current = await prisma.costEntry.findUnique({ where: { id } });
+  if (!current) {
+    return { ok: false as const, error: "Lançamento não encontrado." };
+  }
+
+  // Não editar manualmente baixas automáticas como se fossem custo comum
+  if (current.relatedCostId) {
+    return {
+      ok: false as const,
+      error: "Esta é uma baixa automática do caixa. Altere o lançamento original.",
+    };
+  }
+
   await prisma.costEntry.update({
     where: { id },
     data: {
@@ -102,6 +158,8 @@ export async function updateCostAction(formData: FormData) {
       observation,
     },
   });
+
+  await syncCashWriteOff(id);
 
   revalidatePath("/admin");
   revalidatePath("/admin/custos");

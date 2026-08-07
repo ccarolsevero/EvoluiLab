@@ -49,6 +49,7 @@ export function CostTable({ items }: { items: CostEntry[] }) {
                 <p className="mt-2 text-sm text-mist/55">
                   {formatDate(item.paymentDate)} · {labelPaidBy(item.paidBy)} ·{" "}
                   {labelPaymentStatus(item.paymentStatus)}
+                  {item.relatedCostId ? " · Baixa automática" : ""}
                 </p>
                 {item.observation && (
                   <p className="mt-2 text-sm text-mist/45">{item.observation}</p>
@@ -59,13 +60,16 @@ export function CostTable({ items }: { items: CostEntry[] }) {
                   {formatCurrency(item.amount)}
                 </p>
                 <div className="flex gap-2">
-                  <button
-                    type="button"
-                    onClick={() => setEditingId(item.id)}
-                    className="rounded-md border border-white/12 px-3 py-1.5 text-xs text-mist/70 hover:border-teal/40"
-                  >
-                    Editar
-                  </button>
+                  {!item.relatedCostId && (
+                    <button
+                      type="button"
+                      onClick={() => setEditingId(item.id)}
+                      className="rounded-md border border-white/12 px-3 py-1.5 text-xs text-mist/70 hover:border-teal/40"
+                    >
+                      Editar
+                    </button>
+                  )}
+                  {!item.relatedCostId && (
                   <button
                     type="button"
                     disabled={pending}
@@ -81,6 +85,7 @@ export function CostTable({ items }: { items: CostEntry[] }) {
                   >
                     Excluir
                   </button>
+                  )}
                 </div>
               </div>
             </div>
