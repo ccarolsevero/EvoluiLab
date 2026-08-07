@@ -22,8 +22,8 @@ export function Hero() {
       <div className="grain" />
 
       <div className="section-pad relative flex min-h-[calc(100svh-6rem)] items-center">
-        <div className="container-site grid w-full items-center gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-8">
-          <div className="max-w-[36rem]">
+        <div className="container-site grid w-full items-center gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-6">
+          <div className="max-w-[34rem]">
             <motion.h1
               className="font-display text-[clamp(2.6rem,5.6vw,4.5rem)] leading-[1.02] font-medium tracking-[-0.04em] text-mist"
               initial={reduce ? false : { opacity: 0, y: 24 }}
@@ -68,7 +68,7 @@ export function Hero() {
           </div>
 
           <motion.div
-            className="lg:justify-self-end"
+            className="w-full min-w-0"
             initial={reduce ? false : { opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.18, ease }}

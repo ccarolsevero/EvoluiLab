@@ -58,8 +58,8 @@ export function RealtimeRender() {
     const resize = () => {
       const rect = wrap.getBoundingClientRect();
       dpr = Math.min(window.devicePixelRatio || 1, 2);
-      width = Math.max(360, Math.floor(rect.width));
-      height = Math.max(320, Math.floor(rect.height));
+      width = Math.max(420, Math.floor(rect.width));
+      height = Math.max(380, Math.floor(rect.height));
       canvas.width = Math.floor(width * dpr);
       canvas.height = Math.floor(height * dpr);
       canvas.style.width = `${width}px`;
@@ -93,10 +93,10 @@ export function RealtimeRender() {
       const codeT = reduced ? 1 : clamp01((elapsed - 1.35) / 7.5);
       const blink = Math.floor(elapsed * 1.6) % 2 === 0;
 
-      const padTop = 16;
-      const padBottom = 20;
-      const maxByWidth = Math.min(width * 0.96, 620);
-      const maxByHeight = (height - padTop - padBottom) / 0.78;
+      const padTop = 8;
+      const padBottom = 12;
+      const maxByWidth = Math.min(width * 0.98, 760);
+      const maxByHeight = (height - padTop - padBottom) / 0.72;
       const laptopW = Math.min(maxByWidth, maxByHeight);
       const baseH = laptopW * 0.05;
       const screenH = laptopW * 0.58;
@@ -247,7 +247,7 @@ export function RealtimeRender() {
   return (
     <div
       ref={wrapRef}
-      className="relative mx-auto aspect-[1/1] w-full max-w-[640px] sm:aspect-[5/4] sm:max-w-[680px]"
+      className="relative mx-auto aspect-[5/4] w-full max-w-[760px] sm:max-w-[820px] lg:max-w-none"
       aria-hidden
     >
       <canvas ref={canvasRef} className="h-full w-full" />
