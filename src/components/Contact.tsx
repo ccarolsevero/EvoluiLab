@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { WHATSAPP_URL } from "@/lib/whatsapp";
 import { Reveal } from "./Reveal";
 
 export function Contact() {
@@ -24,7 +25,7 @@ export function Contact() {
       } ${message || "Quero evoluir minha presença digital."}`
     );
 
-    window.open(`https://wa.me/5500000000000?text=${text}`, "_blank");
+    window.open(`${WHATSAPP_URL}?text=${text}`, "_blank");
     setSent(true);
   }
 

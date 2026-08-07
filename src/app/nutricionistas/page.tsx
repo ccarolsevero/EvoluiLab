@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Check } from "lucide-react";
 import { Logo } from "@/components/Logo";
 import { Reveal, Stagger, StaggerItem } from "@/components/Reveal";
+import { WA_NUTRI, WA_NUTRI_DIAGNOSTICO } from "@/lib/whatsapp";
 
 export const metadata: Metadata = {
   title: "Sites e sistemas para nutricionistas | EvoluiLab",
@@ -26,17 +27,8 @@ export const metadata: Metadata = {
   },
 };
 
-const WA =
-  "https://wa.me/5500000000000?text=" +
-  encodeURIComponent(
-    "Olá, EvoluiLab! Quero saber mais sobre sites e sistemas para nutricionistas."
-  );
-
-const WA_DIAGNOSTICO =
-  "https://wa.me/5500000000000?text=" +
-  encodeURIComponent(
-    "Olá! Quero um diagnóstico gratuito do meu site (ou da falta dele) como nutricionista."
-  );
+const WA = WA_NUTRI;
+const WA_DIAGNOSTICO = WA_NUTRI_DIAGNOSTICO;
 
 const heroFeatures = [
   "Design exclusivo",
@@ -179,7 +171,7 @@ export default function NutricionistasPage() {
               >
                 Voltar ao início
               </Link>
-              <a href={WA} className="btn-primary">
+              <a href={WA} target="_blank" rel="noopener noreferrer" className="btn-primary">
                 Quero conversar
               </a>
             </div>
@@ -231,7 +223,7 @@ export default function NutricionistasPage() {
 
               <Reveal delay={160}>
                 <div className="mt-9 flex flex-wrap gap-3">
-                  <a href={WA} className="btn-primary">
+                  <a href={WA} target="_blank" rel="noopener noreferrer" className="btn-primary">
                     Quero um site profissional
                   </a>
                   <a href="#portfolio" className="btn-ghost">
@@ -259,7 +251,7 @@ export default function NutricionistasPage() {
                   momento de investir em um site (ou sistema) que represente
                   melhor o seu consultório.
                 </p>
-                <a href={WA_DIAGNOSTICO} className="btn-ghost mt-8 inline-flex">
+                <a href={WA_DIAGNOSTICO} target="_blank" rel="noopener noreferrer" className="btn-ghost mt-8 inline-flex">
                   Solicitar diagnóstico gratuito
                 </a>
               </Reveal>
@@ -346,7 +338,7 @@ export default function NutricionistasPage() {
                   Do briefing à publicação — e, quando fizer sentido, sistemas
                   para organizar leads e o fluxo do consultório.
                 </p>
-                <a href={WA} className="btn-primary mt-8 inline-flex">
+                <a href={WA} target="_blank" rel="noopener noreferrer" className="btn-primary mt-8 inline-flex">
                   Quero um site assim
                 </a>
               </Reveal>
@@ -413,7 +405,7 @@ export default function NutricionistasPage() {
 
               <Reveal delay={120}>
                 <div className="mt-10">
-                  <a href={WA} className="btn-ghost">
+                  <a href={WA} target="_blank" rel="noopener noreferrer" className="btn-ghost">
                     Quero um projeto como esses
                   </a>
                 </div>
@@ -514,10 +506,10 @@ export default function NutricionistasPage() {
                 pronta para construir isso com você.
               </p>
               <div className="mt-9 flex flex-wrap justify-center gap-3">
-                <a href={WA} className="btn-primary">
+                <a href={WA} target="_blank" rel="noopener noreferrer" className="btn-primary">
                   Quero conversar no WhatsApp
                 </a>
-                <a href={WA_DIAGNOSTICO} className="btn-ghost">
+                <a href={WA_DIAGNOSTICO} target="_blank" rel="noopener noreferrer" className="btn-ghost">
                   Pedir diagnóstico do meu site
                 </a>
               </div>
@@ -541,6 +533,8 @@ export default function NutricionistasPage() {
             <div className="sm:text-right">
               <a
                 href={WA}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="block text-sm text-mist/55 transition hover:text-teal"
               >
                 WhatsApp

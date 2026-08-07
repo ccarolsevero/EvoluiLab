@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowUpRight } from "lucide-react";
+import { WA_HOME } from "@/lib/whatsapp";
 import { Reveal, Stagger, StaggerItem } from "./Reveal";
 
 const services = [
@@ -40,7 +41,9 @@ export function Services() {
             {services.map((service, index) => (
               <StaggerItem key={service.title} as="li">
                 <a
-                  href="#contato"
+                  href={WA_HOME}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="group grid items-baseline gap-4 border-t border-white/8 py-8 transition-colors sm:grid-cols-[5rem_1fr_auto] sm:gap-10 sm:py-10"
                 >
                   <span className="font-display text-sm text-teal/55 tabular-nums">

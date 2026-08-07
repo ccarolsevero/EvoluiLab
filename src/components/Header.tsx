@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { WA_HOME } from "@/lib/whatsapp";
 import { Logo } from "./Logo";
 
 const links = [
@@ -57,7 +57,9 @@ export function Header() {
               size="sm"
               className="hidden h-9 rounded-md px-4 text-xs font-semibold tracking-[0.06em] sm:inline-flex"
             >
-              <Link href="#contato">Fale conosco</Link>
+              <a href={WA_HOME} target="_blank" rel="noopener noreferrer">
+                Fale conosco
+              </a>
             </Button>
             <button
               type="button"
@@ -108,9 +110,14 @@ export function Header() {
             </a>
           ))}
           <Button asChild className="mt-3 h-11 rounded-md">
-            <Link href="#contato" onClick={() => setOpen(false)}>
+            <a
+              href={WA_HOME}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setOpen(false)}
+            >
               Fale conosco
-            </Link>
+            </a>
           </Button>
         </nav>
       </div>

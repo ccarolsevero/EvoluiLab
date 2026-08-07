@@ -7,6 +7,7 @@ import { AdvogadosFaq } from "@/components/AdvogadosFaq";
 import { Logo } from "@/components/Logo";
 import { Reveal, Stagger, StaggerItem } from "@/components/Reveal";
 import { Button } from "@/components/ui/button";
+import { WA_ADVOGADOS, WA_ADVOGADOS_ADS } from "@/lib/whatsapp";
 
 export const metadata: Metadata = {
   title: "Sites e landing pages para advogados | EvoluiLab",
@@ -28,17 +29,8 @@ export const metadata: Metadata = {
   },
 };
 
-const WA =
-  "https://wa.me/5500000000000?text=" +
-  encodeURIComponent(
-    "Olá, EvoluiLab! Quero um site profissional para meu escritório de advocacia."
-  );
-
-const WA_ADS =
-  "https://wa.me/5500000000000?text=" +
-  encodeURIComponent(
-    "Olá, EvoluiLab! Quero saber mais sobre Google Ads para advogados."
-  );
+const WA = WA_ADVOGADOS;
+const WA_ADS = WA_ADVOGADOS_ADS;
 
 const heroFeatures = [
   "Design exclusivo",
@@ -209,7 +201,7 @@ export default function AdvogadosPage() {
               >
                 Voltar ao início
               </Link>
-              <a href={WA} className="btn-primary">
+              <a href={WA} target="_blank" rel="noopener noreferrer" className="btn-primary">
                 Quero conversar
               </a>
             </div>
@@ -219,14 +211,23 @@ export default function AdvogadosPage() {
 
       <main>
         {/* Hero */}
-        <section className="relative overflow-hidden pt-28 pb-16 sm:pt-32 sm:pb-24">
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_20%_0%,rgba(196,165,116,0.12),transparent_45%),linear-gradient(180deg,#141311_0%,#1a1916_100%)]"
-          />
+        <section className="relative min-h-[72svh] overflow-hidden pt-28 pb-20 sm:min-h-[76svh] sm:pt-32 sm:pb-28">
+          <div aria-hidden className="pointer-events-none absolute inset-0">
+            <Image
+              src="/hero/hero-advogados.png"
+              alt=""
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover object-[88%_top] sm:object-[80%_8%]"
+            />
+            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(20,19,17,0.95)_0%,rgba(20,19,17,0.8)_36%,rgba(20,19,17,0.28)_68%,rgba(20,19,17,0.38)_100%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_18%_0%,rgba(196,165,116,0.12),transparent_45%),linear-gradient(180deg,rgba(20,19,17,0.2)_0%,rgba(20,19,17,0.68)_100%)]" />
+          </div>
           <div className="grain" />
           <div className="section-pad relative">
-            <div className="container-site max-w-3xl">
+            <div className="container-site">
+              <div className="max-w-3xl">
               <Reveal>
                 <p className="font-display text-[0.7rem] font-medium tracking-[0.22em] text-teal uppercase">
                   Especialistas em sites e landing pages para advogados
@@ -258,11 +259,12 @@ export default function AdvogadosPage() {
 
               <Reveal delay={160}>
                 <div className="mt-10">
-                  <a href={WA} className="btn-primary">
+                  <a href={WA} target="_blank" rel="noopener noreferrer" className="btn-primary">
                     Quero um Site Profissional
                   </a>
                 </div>
               </Reveal>
+              </div>
             </div>
           </div>
         </section>
@@ -325,7 +327,7 @@ export default function AdvogadosPage() {
 
               <Reveal delay={120}>
                 <div className="mt-10">
-                  <a href={WA} className="btn-ghost">
+                  <a href={WA} target="_blank" rel="noopener noreferrer" className="btn-ghost">
                     Quero um projeto como esses
                   </a>
                 </div>
@@ -401,7 +403,7 @@ export default function AdvogadosPage() {
                   Essa primeira impressão faz toda a diferença. É exatamente essa
                   experiência que desenvolvemos.
                 </p>
-                <a href={WA} className="btn-primary mt-8 inline-flex">
+                <a href={WA} target="_blank" rel="noopener noreferrer" className="btn-primary mt-8 inline-flex">
                   Quero um Site Profissional
                 </a>
               </Reveal>
@@ -410,80 +412,125 @@ export default function AdvogadosPage() {
         </section>
 
         {/* Google Ads */}
-        <section className="relative py-20 sm:py-28">
-          <div className="section-pad">
-            <div className="container-site">
-              <Reveal className="max-w-3xl">
-                <p className="font-display text-[0.7rem] font-medium tracking-[0.22em] text-teal uppercase">
-                  Google Ads
-                </p>
-                <h2 className="mt-4 font-display text-[clamp(1.8rem,3.5vw,2.8rem)] leading-[1.1] font-medium tracking-[-0.03em]">
-                  Seja encontrado por quem já está procurando um advogado
-                </h2>
-                <p className="mt-5 text-base leading-relaxed text-mist/60">
-                  Ter um site profissional é o primeiro passo. O segundo é fazer
-                  com que as pessoas certas encontrem o seu escritório.
-                </p>
-                <p className="mt-4 text-base leading-relaxed text-mist/60">
-                  Todos os dias, milhares de pessoas pesquisam no Google por
-                  termos como:
-                </p>
-              </Reveal>
+        <section id="google-ads" className="relative">
+          {/* Visual banner — same scheme as hero */}
+          <div className="relative flex min-h-[420px] items-center overflow-hidden py-16 sm:aspect-[21/9] sm:min-h-0 sm:py-0">
+            <div aria-hidden className="pointer-events-none absolute inset-0">
+              <Image
+                src="/hero/ads-google-advogados.png"
+                alt=""
+                fill
+                sizes="100vw"
+                className="object-cover object-[92%_62%] sm:object-[88%_58%]"
+              />
+              <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(20,19,17,0.96)_0%,rgba(20,19,17,0.82)_32%,rgba(20,19,17,0.22)_62%,rgba(20,19,17,0.35)_100%)]" />
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_18%_0%,rgba(196,165,116,0.1),transparent_45%),linear-gradient(180deg,rgba(20,19,17,0.15)_0%,rgba(20,19,17,0.55)_100%)]" />
+            </div>
+            <div className="grain" />
+            <div className="section-pad relative w-full py-10 sm:py-14">
+              <div className="container-site">
+                <div className="max-w-3xl">
+                <Reveal>
+                  <p className="font-display text-[0.7rem] font-medium tracking-[0.22em] text-teal uppercase">
+                    Google Ads
+                  </p>
+                  <h2 className="mt-4 font-display text-[clamp(1.8rem,3.5vw,2.8rem)] leading-[1.1] font-medium tracking-[-0.03em]">
+                    Seja encontrado por quem já está procurando um advogado
+                  </h2>
+                  <p className="mt-5 max-w-2xl text-base leading-relaxed text-mist/60 sm:text-lg">
+                    Ter um site profissional é o primeiro passo. O segundo é
+                    fazer com que as pessoas certas encontrem o seu escritório.
+                  </p>
+                </Reveal>
+                <Reveal delay={100}>
+                  <a
+                    href={WA_ADS}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-primary mt-9 inline-flex"
+                  >
+                    Quero saber mais sobre Google Ads
+                  </a>
+                </Reveal>
+                </div>
+              </div>
+            </div>
+          </div>
 
-              <Reveal delay={80}>
-                <ul className="mt-6 flex flex-wrap gap-2">
-                  {searchTerms.map((term) => (
-                    <li
-                      key={term}
-                      className="border border-white/10 bg-elevated px-3 py-2 text-sm text-mist/70"
-                    >
-                      {term}
-                    </li>
-                  ))}
-                </ul>
-              </Reveal>
+          {/* Content */}
+          <div className="relative border-y border-white/6 bg-surface py-20 sm:py-28">
+            <div className="section-pad">
+              <div className="container-site max-w-3xl">
+                <Reveal>
+                  <p className="text-base leading-relaxed text-mist/60">
+                    Todos os dias, milhares de pessoas pesquisam no Google por
+                    termos como:
+                  </p>
+                </Reveal>
 
-              <Reveal delay={120} className="mt-10 max-w-3xl">
-                <p className="text-base leading-relaxed text-mist/60">
-                  Essas pessoas já sabem que precisam de um advogado. Elas estão
-                  procurando um profissional em quem possam confiar. É nesse
-                  momento que uma estratégia de Google Ads pode colocar o seu
-                  escritório em evidência.
-                </p>
-                <p className="mt-4 text-base leading-relaxed text-mist/60">
-                  Em vez de esperar que o cliente encontre você, seu escritório
-                  passa a aparecer para pessoas que já estão procurando pelos
-                  serviços que você oferece.
-                </p>
-                <h3 className="mt-10 font-display text-xl font-medium tracking-[-0.02em]">
-                  Como funciona?
-                </h3>
-                <ul className="mt-5 space-y-3">
-                  {adsHow.map((item) => (
-                    <CheckItem key={item}>{item}</CheckItem>
-                  ))}
-                </ul>
-              </Reveal>
+                <Reveal delay={80}>
+                  <ul className="mt-6 flex flex-wrap gap-2">
+                    {searchTerms.map((term) => (
+                      <li
+                        key={term}
+                        className="border border-white/10 bg-ink px-3 py-2 text-sm text-mist/70"
+                      >
+                        {term}
+                      </li>
+                    ))}
+                  </ul>
+                </Reveal>
 
-              <Reveal delay={160} className="mt-14 max-w-3xl border border-teal/25 bg-elevated/60 p-6 sm:p-8">
-                <h3 className="font-display text-xl font-medium tracking-[-0.02em] sm:text-2xl">
-                  Site + Google Ads: uma estratégia muito mais completa
-                </h3>
-                <p className="mt-4 text-base leading-relaxed text-mist/60">
-                  Não basta aparecer no Google. Quando alguém clica no anúncio,
-                  precisa encontrar um escritório que transmita confiança. Um
-                  site organizado, com informações claras e uma comunicação
-                  profissional faz toda a diferença nesse momento.
-                </p>
-                <p className="mt-4 text-base leading-relaxed text-mist/60">
-                  É por isso que acreditamos que anúncios e site devem trabalhar
-                  juntos. Um atrai a visita. O outro ajuda a transformar essa
-                  visita em um contato.
-                </p>
-                <a href={WA_ADS} className="btn-primary mt-7 inline-flex">
-                  Quero saber mais sobre Google Ads
-                </a>
-              </Reveal>
+                <Reveal delay={120} className="mt-10">
+                  <p className="text-base leading-relaxed text-mist/60">
+                    Essas pessoas já sabem que precisam de um advogado. Elas
+                    estão procurando um profissional em quem possam confiar. É
+                    nesse momento que uma estratégia de Google Ads pode colocar
+                    o seu escritório em evidência.
+                  </p>
+                  <p className="mt-4 text-base leading-relaxed text-mist/60">
+                    Em vez de esperar que o cliente encontre você, seu
+                    escritório passa a aparecer para pessoas que já estão
+                    procurando pelos serviços que você oferece.
+                  </p>
+                  <h3 className="mt-10 font-display text-xl font-medium tracking-[-0.02em]">
+                    Como funciona?
+                  </h3>
+                  <ul className="mt-5 space-y-3">
+                    {adsHow.map((item) => (
+                      <CheckItem key={item}>{item}</CheckItem>
+                    ))}
+                  </ul>
+                </Reveal>
+
+                <Reveal
+                  delay={160}
+                  className="mt-14 border border-teal/25 bg-ink/70 p-6 sm:p-8"
+                >
+                  <h3 className="font-display text-xl font-medium tracking-[-0.02em] sm:text-2xl">
+                    Site + Google Ads: uma estratégia muito mais completa
+                  </h3>
+                  <p className="mt-4 text-base leading-relaxed text-mist/60">
+                    Não basta aparecer no Google. Quando alguém clica no
+                    anúncio, precisa encontrar um escritório que transmita
+                    confiança. Um site organizado, com informações claras e uma
+                    comunicação profissional faz toda a diferença nesse momento.
+                  </p>
+                  <p className="mt-4 text-base leading-relaxed text-mist/60">
+                    É por isso que acreditamos que anúncios e site devem
+                    trabalhar juntos. Um atrai a visita. O outro ajuda a
+                    transformar essa visita em um contato.
+                  </p>
+                  <a
+                    href={WA_ADS}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-primary mt-7 inline-flex"
+                  >
+                    Quero saber mais sobre Google Ads
+                  </a>
+                </Reveal>
+              </div>
             </div>
           </div>
         </section>
@@ -558,7 +605,7 @@ export default function AdvogadosPage() {
                   fortalecer a imagem do escritório e tornar o contato mais
                   simples para quem procura orientação jurídica.
                 </p>
-                <a href={WA} className="btn-primary mt-8 inline-flex">
+                <a href={WA} target="_blank" rel="noopener noreferrer" className="btn-primary mt-8 inline-flex">
                   Quero um Site Profissional
                 </a>
               </Reveal>
@@ -683,7 +730,7 @@ export default function AdvogadosPage() {
                 qualidade do seu trabalho.
               </p>
               <Button asChild size="lg" className="mt-9 h-11 rounded-md px-7">
-                <a href={WA}>Quero um Site Profissional</a>
+                <a href={WA} target="_blank" rel="noopener noreferrer">Quero um Site Profissional</a>
               </Button>
             </Reveal>
           </div>
@@ -705,6 +752,8 @@ export default function AdvogadosPage() {
             <div className="sm:text-right">
               <a
                 href={WA}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="block text-sm text-mist/55 transition hover:text-teal"
               >
                 WhatsApp

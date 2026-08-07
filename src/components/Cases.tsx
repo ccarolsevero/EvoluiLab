@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { WA_HOME } from "@/lib/whatsapp";
 import { Reveal, Stagger, StaggerItem } from "./Reveal";
 
 const cases = [
@@ -41,7 +41,9 @@ export function Cases() {
               variant="outline"
               className="h-10 w-fit rounded-md border-teal/35 bg-transparent text-mist hover:border-teal/60 hover:bg-teal/10 hover:text-mist"
             >
-              <Link href="#contato">Quero um case assim</Link>
+              <a href={WA_HOME} target="_blank" rel="noopener noreferrer">
+                Quero um case assim
+              </a>
             </Button>
           </div>
 

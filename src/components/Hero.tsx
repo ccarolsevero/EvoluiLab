@@ -3,6 +3,7 @@
 import { motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { WA_HOME } from "@/lib/whatsapp";
 import { RealtimeRender } from "./RealtimeRender";
 
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -56,7 +57,9 @@ export function Hero() {
                 size="lg"
                 className="h-11 rounded-md px-6 text-sm font-semibold tracking-[0.04em]"
               >
-                <Link href="#contato">Quero evoluir</Link>
+                <a href={WA_HOME} target="_blank" rel="noopener noreferrer">
+                  Quero evoluir
+                </a>
               </Button>
               <Button
                 asChild
