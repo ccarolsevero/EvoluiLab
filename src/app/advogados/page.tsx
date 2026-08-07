@@ -33,11 +33,10 @@ const WA = WA_ADVOGADOS;
 const WA_ADS = WA_ADVOGADOS_ADS;
 
 const heroFeatures = [
+  "Pagamento único",
+  "Sem mensalidade",
   "Design exclusivo",
-  "SEO",
-  "WhatsApp",
-  "Google Maps",
-  "Responsivo",
+  "SEO incluso",
 ];
 
 const situations = [
@@ -229,13 +228,14 @@ export default function AdvogadosPage() {
             <div className="container-site">
               <div className="max-w-3xl">
               <Reveal>
-                <p className="font-display text-[0.7rem] font-medium tracking-[0.22em] text-teal uppercase">
-                  Especialistas em sites e landing pages para advogados
-                </p>
-                <h1 className="mt-5 font-display text-[clamp(2.2rem,5vw,3.8rem)] leading-[1.05] font-medium tracking-[-0.04em]">
-                  Sites profissionais para advogados e escritórios
+                <h1 className="font-display text-[clamp(2.2rem,5vw,3.8rem)] leading-[1.05] font-medium tracking-[-0.04em]">
+                  Especialistas em sites para advogados
                 </h1>
-                <p className="mt-6 max-w-2xl text-base leading-relaxed text-mist/60 sm:text-lg">
+                <p className="mt-5 max-w-2xl text-lg leading-relaxed text-mist/75 sm:text-xl">
+                  Seu escritório merece um site que transmita autoridade e gere
+                  mais oportunidades de negócio.
+                </p>
+                <p className="mt-5 max-w-2xl text-base leading-relaxed text-mist/60 sm:text-lg">
                   Desenvolvemos sites e landing pages exclusivos para advogados
                   que desejam apresentar seus serviços com mais profissionalismo,
                   aparecer melhor no Google e facilitar o contato de clientes em
@@ -260,7 +260,7 @@ export default function AdvogadosPage() {
               <Reveal delay={160}>
                 <div className="mt-10">
                   <a href={WA} target="_blank" rel="noopener noreferrer" className="btn-primary">
-                    Quero um Site Profissional
+                    Quero meu site
                   </a>
                 </div>
               </Reveal>
