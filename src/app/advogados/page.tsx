@@ -228,9 +228,10 @@ export default function AdvogadosPage() {
                 <p className="font-display text-[0.7rem] font-medium tracking-[0.22em] text-teal uppercase">
                   Especialistas em sites para advogados
                 </p>
-                <h1 className="mt-4 font-display text-[clamp(2.2rem,5vw,3.8rem)] leading-[1.05] font-medium tracking-[-0.04em] text-teal">
-                  Seu escritório merece um site que transmita autoridade e gere
-                  mais oportunidades de negócio.
+                <h1 className="mt-4 font-display text-[clamp(2.2rem,5vw,3.8rem)] leading-[1.05] font-medium tracking-[-0.04em] text-mist">
+                  Seu escritório merece um site que transmita{" "}
+                  <span className="text-teal">autoridade</span> e gere mais{" "}
+                  <span className="text-teal">oportunidades de negócio</span>.
                 </h1>
                 <p className="mt-8 max-w-2xl text-base leading-relaxed text-mist/55 sm:mt-9 sm:text-lg">
                   Desenvolvemos sites e landing pages exclusivos para advogados
