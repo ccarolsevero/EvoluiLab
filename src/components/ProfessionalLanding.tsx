@@ -135,21 +135,21 @@ export function ProfessionalLanding({
 
               <Stagger
                 as="ul"
-                className="mt-12 grid gap-4 sm:grid-cols-2"
+                className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
                 stagger={0.08}
               >
                 {config.portfolio.map((item) => (
                   <StaggerItem key={item.name} as="li">
                     <article className="group overflow-hidden border border-white/8 bg-ink transition hover:border-teal/30">
-                      <div className="relative aspect-[16/10] overflow-hidden bg-[linear-gradient(145deg,#1a1917_0%,#252320_45%,#1f2a28_100%)]">
-                        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_85%_15%,rgba(196,165,116,0.22),transparent_55%)]" />
-                        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-ink/70 via-transparent to-transparent" />
-                        <div className="absolute bottom-0 left-0 h-full w-1 bg-teal/55 transition group-hover:bg-teal" />
-                        <div className="absolute inset-0 flex items-end p-5">
-                          <p className="font-display text-sm tracking-[0.18em] text-teal/70 uppercase">
-                            Preview
-                          </p>
-                        </div>
+                      <div className="relative aspect-[16/10] overflow-hidden bg-slate/40">
+                        <Image
+                          src={item.image}
+                          alt={`Preview do site ${item.name}`}
+                          fill
+                          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                          className="object-cover object-top transition duration-500 group-hover:scale-[1.03]"
+                        />
+                        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/45 via-transparent to-transparent" />
                       </div>
                       <div className="p-5">
                         <p className="text-[0.7rem] font-medium tracking-[0.16em] text-teal uppercase">

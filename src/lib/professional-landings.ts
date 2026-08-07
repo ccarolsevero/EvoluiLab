@@ -25,7 +25,7 @@ export type ProfessionalLandingConfig = {
   situations: string[];
   imagineItems: string[];
   searchTerms: string[];
-  portfolio: { name: string; area: string; tag: string }[];
+  portfolio: { name: string; area: string; tag: string; image: string }[];
   testimonials: { quote: string; name: string; place: string }[];
   faqs: { q: string; a: string }[];
   manifesto: { title: string; p1: string; p2: string };
@@ -156,10 +156,30 @@ export const PROFESSIONAL_LANDINGS: ProfessionalLandingConfig[] = [
       "Médico online",
     ],
     portfolio: [
-      { name: "Dra. Ana Beatriz Lima", area: "Dermatologia", tag: "Landing page" },
-      { name: "Dr. Ricardo Mota", area: "Cardiologia", tag: "Site institucional" },
-      { name: "Clínica Vita+", area: "Clínica médica", tag: "Site + Ads" },
-      { name: "Dr. Felipe Nogueira", area: "Ortopedia", tag: "Site institucional" },
+      {
+        name: "Dra. Ana Beatriz Lima",
+        area: "Dermatologia",
+        tag: "Landing page",
+        image: "/portfolio/portfolio-ana-beatriz.png",
+      },
+      {
+        name: "Dr. Ricardo Mota",
+        area: "Cardiologia",
+        tag: "Site institucional",
+        image: "/portfolio/portfolio-ricardo-mota.png",
+      },
+      {
+        name: "Clínica Vita+",
+        area: "Clínica médica",
+        tag: "Site + Ads",
+        image: "/portfolio/portfolio-clinica-vita.png",
+      },
+      {
+        name: "Dr. Felipe Nogueira",
+        area: "Ortopedia",
+        tag: "Site institucional",
+        image: "/portfolio/portfolio-felipe-nogueira.png",
+      },
     ],
     testimonials: [
       {
@@ -287,10 +307,30 @@ export const PROFESSIONAL_LANDINGS: ProfessionalLandingConfig[] = [
       "Clínica odontológica",
     ],
     portfolio: [
-      { name: "Dra. Marina Costa", area: "Odontologia estética", tag: "Landing page" },
-      { name: "Clínica Sorriso+", area: "Clínica odontológica", tag: "Site institucional" },
-      { name: "Dr. André Vale", area: "Implantes", tag: "Site + Ads" },
-      { name: "OrthoCare", area: "Ortodontia", tag: "Site institucional" },
+      {
+        name: "Dra. Marina Costa",
+        area: "Odontologia estética",
+        tag: "Landing page",
+        image: "/portfolio/portfolio-marina-costa.png",
+      },
+      {
+        name: "Clínica Sorriso+",
+        area: "Clínica odontológica",
+        tag: "Site institucional",
+        image: "/portfolio/portfolio-sorriso.png",
+      },
+      {
+        name: "Dr. André Vale",
+        area: "Implantes",
+        tag: "Site + Ads",
+        image: "/portfolio/portfolio-andre-vale.png",
+      },
+      {
+        name: "OrthoCare",
+        area: "Ortodontia",
+        tag: "Site institucional",
+        image: "/portfolio/portfolio-orthocare.png",
+      },
     ],
     testimonials: [
       {
@@ -418,10 +458,30 @@ export const PROFESSIONAL_LANDINGS: ProfessionalLandingConfig[] = [
       "Psicólogo casal",
     ],
     portfolio: [
-      { name: "Dra. Sofía Mendes", area: "Terapia cognitivo-comportamental", tag: "Landing page" },
-      { name: "Espaço Ser", area: "Psicologia clínica", tag: "Site institucional" },
-      { name: "Dr. Lucas Azevedo", area: "Terapia online", tag: "Site + Ads" },
-      { name: "Clínica Pulsar", area: "Saúde mental", tag: "Site institucional" },
+      {
+        name: "Dra. Sofía Mendes",
+        area: "Terapia cognitivo-comportamental",
+        tag: "Landing page",
+        image: "/portfolio/portfolio-sofia-mendes.png",
+      },
+      {
+        name: "Espaço Ser",
+        area: "Psicologia clínica",
+        tag: "Site institucional",
+        image: "/portfolio/portfolio-espaco-ser.png",
+      },
+      {
+        name: "Dr. Lucas Azevedo",
+        area: "Terapia online",
+        tag: "Site + Ads",
+        image: "/portfolio/portfolio-lucas-azevedo.png",
+      },
+      {
+        name: "Clínica Pulsar",
+        area: "Saúde mental",
+        tag: "Site institucional",
+        image: "/portfolio/portfolio-clinica-pulsar.png",
+      },
     ],
     testimonials: [
       {
@@ -549,10 +609,30 @@ export const PROFESSIONAL_LANDINGS: ProfessionalLandingConfig[] = [
       "Arquiteto comercial",
     ],
     portfolio: [
-      { name: "Studio Norte", area: "Arquitetura residencial", tag: "Site institucional" },
-      { name: "Ana Luz Arquitetura", area: "Interiores", tag: "Landing page" },
-      { name: "Forma Escala", area: "Comercial", tag: "Site + portfólio" },
-      { name: "Atelier Campo", area: "Arquitetura contemporânea", tag: "Site institucional" },
+      {
+        name: "Studio Norte",
+        area: "Arquitetura residencial",
+        tag: "Site institucional",
+        image: "/portfolio/portfolio-studio-norte.png",
+      },
+      {
+        name: "Ana Luz Arquitetura",
+        area: "Interiores",
+        tag: "Landing page",
+        image: "/portfolio/portfolio-ana-luz.png",
+      },
+      {
+        name: "Forma Escala",
+        area: "Comercial",
+        tag: "Site + portfólio",
+        image: "/portfolio/portfolio-forma-escala.png",
+      },
+      {
+        name: "Atelier Campo",
+        area: "Arquitetura contemporânea",
+        tag: "Site institucional",
+        image: "/portfolio/portfolio-atelier-campo.png",
+      },
     ],
     testimonials: [
       {
@@ -680,10 +760,30 @@ export const PROFESSIONAL_LANDINGS: ProfessionalLandingConfig[] = [
       "Consultor de negócios",
     ],
     portfolio: [
-      { name: "Clara Dias Consulting", area: "Consultoria de negócios", tag: "Landing page" },
-      { name: "Atlas Advisory", area: "Consultoria financeira", tag: "Site institucional" },
-      { name: "Nexo Estratégia", area: "Marketing e growth", tag: "Site + Ads" },
-      { name: "Dr. Paulo Siqueira", area: "Consultoria jurídica-empresarial", tag: "Site institucional" },
+      {
+        name: "Clara Dias Consulting",
+        area: "Consultoria de negócios",
+        tag: "Landing page",
+        image: "/portfolio/portfolio-clara-dias.png",
+      },
+      {
+        name: "Atlas Advisory",
+        area: "Consultoria financeira",
+        tag: "Site institucional",
+        image: "/portfolio/portfolio-atlas-advisory.png",
+      },
+      {
+        name: "Nexo Estratégia",
+        area: "Marketing e growth",
+        tag: "Site + Ads",
+        image: "/portfolio/portfolio-nexo-estrategia.png",
+      },
+      {
+        name: "Dr. Paulo Siqueira",
+        area: "Consultoria jurídico-empresarial",
+        tag: "Site institucional",
+        image: "/portfolio/portfolio-paulo-siqueira.png",
+      },
     ],
     testimonials: [
       {
@@ -811,10 +911,30 @@ export const PROFESSIONAL_LANDINGS: ProfessionalLandingConfig[] = [
       "Agendar consulta",
     ],
     portfolio: [
-      { name: "Clínica Aurora", area: "Clínica multidisciplinar", tag: "Site institucional" },
-      { name: "Instituto Bem-Estar", area: "Clínica de saúde", tag: "Landing page" },
-      { name: "Vita Estética", area: "Clínica de estética", tag: "Site + Ads" },
-      { name: "Centro Médico Horizonte", area: "Clínica médica", tag: "Site institucional" },
+      {
+        name: "Clínica Aurora",
+        area: "Clínica multidisciplinar",
+        tag: "Site institucional",
+        image: "/portfolio/portfolio-clinica-aurora.png",
+      },
+      {
+        name: "Instituto Bem-Estar",
+        area: "Clínica de saúde",
+        tag: "Landing page",
+        image: "/portfolio/portfolio-instituto-bem-estar.png",
+      },
+      {
+        name: "Vita Estética",
+        area: "Clínica de estética",
+        tag: "Site + Ads",
+        image: "/portfolio/portfolio-vita-estetica.png",
+      },
+      {
+        name: "Centro Médico Horizonte",
+        area: "Clínica médica",
+        tag: "Site institucional",
+        image: "/portfolio/portfolio-centro-horizonte.png",
+      },
     ],
     testimonials: [
       {
