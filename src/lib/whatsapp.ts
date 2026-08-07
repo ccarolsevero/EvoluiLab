@@ -20,7 +20,11 @@ export const WA_ADVOGADOS_ADS = whatsappLink(
 );
 
 export const WA_NUTRI = whatsappLink(
-  "Olá, EvoluiLab! Quero saber mais sobre sites e sistemas para nutricionistas."
+  "Olá, EvoluiLab! Quero um site profissional para nutricionistas."
+);
+
+export const WA_NUTRI_ADS = whatsappLink(
+  "Olá, EvoluiLab! Quero atrair mais pacientes pelo Google Ads."
 );
 
 export const WA_NUTRI_DIAGNOSTICO = whatsappLink(
