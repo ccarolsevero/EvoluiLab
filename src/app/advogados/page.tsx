@@ -199,7 +199,7 @@ export default function AdvogadosPage() {
                 Voltar ao início
               </Link>
               <a href={WA} target="_blank" rel="noopener noreferrer" className="btn-primary">
-                Quero conversar
+                Falar com Especialista
               </a>
             </div>
           </div>
