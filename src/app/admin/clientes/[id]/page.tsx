@@ -19,7 +19,21 @@ export default async function ClienteDetailPage({
   const { id } = await params;
   const client = await prisma.client.findUnique({
     where: { id },
-    include: { documents: { orderBy: { createdAt: "desc" } } },
+    include: {
+      documents: {
+        orderBy: { createdAt: "desc" },
+        select: {
+          id: true,
+          clientId: true,
+          kind: true,
+          originalName: true,
+          fileName: true,
+          mimeType: true,
+          size: true,
+          createdAt: true,
+        },
+      },
+    },
   });
 
   if (!client) notFound();
@@ -92,25 +106,42 @@ export default async function ClienteDetailPage({
           </p>
         )}
 
-        <section className="mt-10">
-          <h2 className="font-display text-xl font-medium">Editar dados</h2>
-          <div className="mt-4">
-            <ClientForm initial={client} mode="edit" />
-          </div>
-        </section>
+        {client.anamnese && (
+          <section className="mt-8 border border-white/10 bg-surface p-5">
+            <h2 className="text-[0.65rem] tracking-[0.14em] text-mist/40 uppercase">
+              Anamnese
+            </h2>
+            <p className="mt-3 whitespace-pre-wrap text-sm leading-relaxed text-mist/80">
+              {client.anamnese}
+            </p>
+          </section>
+        )}
 
-        <section className="mt-12">
-          <h2 className="font-display text-xl font-medium">
-            Documentos e anamneses
-          </h2>
-          <p className="mt-1 text-sm text-mist/50">
-            Anexe contratos, briefings, anamneses e demais arquivos do cliente.
-          </p>
-          <div className="mt-4">
-            <DocumentUpload
-              clientId={client.id}
-              documents={client.documents}
-            />
+        <section className="mt-10 space-y-10">
+          <div>
+            <h2 className="font-display text-xl font-medium">Editar cliente</h2>
+            <p className="mt-1 text-sm text-mist/50">
+              Atualize os dados, escreva a anamnese e anexe PDFs ou imagens.
+            </p>
+            <div className="mt-4">
+              <ClientForm initial={client} mode="edit" />
+            </div>
+          </div>
+
+          <div>
+            <h3 className="font-display text-lg font-medium">
+              Anexar documentos
+            </h3>
+            <p className="mt-1 text-sm text-mist/50">
+              Contratos, briefings, anamneses em arquivo, prints e demais PDFs
+              ou imagens.
+            </p>
+            <div className="mt-4">
+              <DocumentUpload
+                clientId={client.id}
+                documents={client.documents}
+              />
+            </div>
           </div>
         </section>
       </main>

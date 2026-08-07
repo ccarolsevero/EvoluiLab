@@ -2,8 +2,6 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { mkdir, unlink, writeFile } from "node:fs/promises";
-import path from "node:path";
 import {
   createAdminSession,
   destroyAdminSession,
@@ -15,6 +13,10 @@ import {
   servicesFromFormData,
   summarizeServices,
 } from "@/lib/client-services";
+import {
+  resolveDocumentMime,
+  validateClientDocument,
+} from "@/lib/client-documents";
 import type {
   ClientPaymentStatus,
   CostType,
@@ -188,6 +190,7 @@ export async function createClientAction(formData: FormData) {
     formData.get("paymentStatus") || "PENDENTE"
   ) as ClientPaymentStatus;
   const observation = String(formData.get("observation") || "").trim();
+  const anamnese = String(formData.get("anamnese") || "").trim();
   const { lines, serviceLabel, totalValue, valuesJson } = summarizeServices(
     servicesFromFormData(formData)
   );
@@ -208,6 +211,7 @@ export async function createClientAction(formData: FormData) {
       totalValue,
       paymentStatus,
       observation,
+      anamnese,
     },
   });
 
@@ -225,6 +229,7 @@ export async function updateClientAction(formData: FormData) {
     formData.get("paymentStatus") || "PENDENTE"
   ) as ClientPaymentStatus;
   const observation = String(formData.get("observation") || "").trim();
+  const anamnese = String(formData.get("anamnese") || "").trim();
   const { lines, serviceLabel, totalValue, valuesJson } = summarizeServices(
     servicesFromFormData(formData)
   );
@@ -246,6 +251,7 @@ export async function updateClientAction(formData: FormData) {
       totalValue,
       paymentStatus,
       observation,
+      anamnese,
     },
   });
 
@@ -260,16 +266,6 @@ export async function deleteClientAction(formData: FormData) {
   const id = String(formData.get("id") || "");
   if (!id) return;
 
-  const docs = await prisma.clientDocument.findMany({ where: { clientId: id } });
-  for (const doc of docs) {
-    const filePath = path.join(process.cwd(), "uploads", "clientes", doc.fileName);
-    try {
-      await unlink(filePath);
-    } catch {
-      // ignore missing files
-    }
-  }
-
   await prisma.client.delete({ where: { id } });
   revalidatePath("/admin");
   revalidatePath("/admin/clientes");
@@ -282,16 +278,19 @@ export async function uploadClientDocumentAction(formData: FormData) {
   const kind = String(formData.get("kind") || "DOCUMENTO") as DocumentKind;
   const file = formData.get("file");
 
-  if (!clientId || !(file instanceof File) || file.size === 0) {
+  if (!clientId || !(file instanceof File)) {
     return { ok: false as const, error: "Selecione um arquivo." };
   }
 
+  const validationError = validateClientDocument(file);
+  if (validationError) {
+    return { ok: false as const, error: validationError };
+  }
+
+  const mimeType = resolveDocumentMime(file);
   const bytes = Buffer.from(await file.arrayBuffer());
   const safeBase = file.name.replace(/[^a-zA-Z0-9._-]/g, "_");
   const fileName = `${Date.now()}-${safeBase}`;
-  const dir = path.join(process.cwd(), "uploads", "clientes");
-  await mkdir(dir, { recursive: true });
-  await writeFile(path.join(dir, fileName), bytes);
 
   await prisma.clientDocument.create({
     data: {
@@ -299,8 +298,9 @@ export async function uploadClientDocumentAction(formData: FormData) {
       kind,
       originalName: file.name,
       fileName,
-      mimeType: file.type || "application/octet-stream",
+      mimeType,
       size: file.size,
+      data: bytes,
     },
   });
 
@@ -316,13 +316,6 @@ export async function deleteClientDocumentAction(formData: FormData) {
 
   const doc = await prisma.clientDocument.findUnique({ where: { id } });
   if (!doc) return { ok: false as const, error: "Arquivo não encontrado." };
-
-  const filePath = path.join(process.cwd(), "uploads", "clientes", doc.fileName);
-  try {
-    await unlink(filePath);
-  } catch {
-    // ignore
-  }
 
   await prisma.clientDocument.delete({ where: { id } });
   revalidatePath(`/admin/clientes/${clientId || doc.clientId}`);

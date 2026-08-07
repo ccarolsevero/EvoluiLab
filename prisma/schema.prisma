@@ -67,6 +67,8 @@ model Client {
   totalValue    Float
   paymentStatus ClientPaymentStatus @default(PENDENTE)
   observation   String              @default("")
+  /// Texto livre da anamnese do cliente
+  anamnese      String              @default("")
   createdAt     DateTime            @default(now())
   updatedAt     DateTime            @updatedAt
   documents     ClientDocument[]
@@ -81,5 +83,7 @@ model ClientDocument {
   fileName     String
   mimeType     String
   size         Int
+  /// Conteúdo do arquivo (PDF/imagem) — necessário para persistir na Vercel
+  data         Bytes?
   createdAt    DateTime     @default(now())
 }

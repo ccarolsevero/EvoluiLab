@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState, useTransition } from "react";
+import { useRef, useState, useTransition } from "react";
 import {
   DOCUMENT_KIND_OPTIONS,
   labelDocumentKind,
@@ -13,14 +13,17 @@ import {
 import { formatDate } from "@/lib/format";
 import type { ClientDocument } from "@/generated/prisma";
 
+type DocListItem = Omit<ClientDocument, "data">;
+
 export function DocumentUpload({
   clientId,
   documents,
 }: {
   clientId: string;
-  documents: ClientDocument[];
+  documents: DocListItem[];
 }) {
   const router = useRouter();
+  const fileRef = useRef<HTMLInputElement>(null);
   const [error, setError] = useState<string | null>(null);
   const [pending, startTransition] = useTransition();
 
@@ -36,6 +39,7 @@ export function DocumentUpload({
               return;
             }
             setError(null);
+            if (fileRef.current) fileRef.current.value = "";
             router.refresh();
           });
         }}
@@ -60,13 +64,15 @@ export function DocumentUpload({
         </div>
         <div>
           <label className="mb-1.5 block text-xs text-mist/55" htmlFor="file">
-            Arquivo
+            Arquivo (PDF ou imagem)
           </label>
           <input
+            ref={fileRef}
             id="file"
             name="file"
             type="file"
             required
+            accept="application/pdf,image/jpeg,image/png,image/webp,image/gif,.pdf,.jpg,.jpeg,.png,.webp,.gif"
             className="block w-full text-sm text-mist/70 file:mr-3 file:rounded-md file:border-0 file:bg-teal/20 file:px-3 file:py-2 file:text-teal"
           />
         </div>
@@ -79,13 +85,16 @@ export function DocumentUpload({
             {pending ? "Enviando…" : "Anexar"}
           </button>
         </div>
+        <p className="sm:col-span-3 text-xs text-mist/45">
+          Formatos aceitos: PDF, JPG, PNG, WEBP ou GIF · até 8 MB
+        </p>
         {error && <p className="sm:col-span-3 text-sm text-red-300">{error}</p>}
       </form>
 
       <ul className="space-y-3">
         {documents.length === 0 && (
           <li className="text-sm text-mist/45">
-            Nenhum documento ou anamnese anexado.
+            Nenhum documento anexado ainda.
           </li>
         )}
         {documents.map((doc) => (

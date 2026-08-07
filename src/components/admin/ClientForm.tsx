@@ -218,6 +218,20 @@ export function ClientForm({ initial = null, mode = "create" }: Props) {
         />
       </div>
 
+      <div className="sm:col-span-2">
+        <label className={labelCls} htmlFor="anamnese">
+          Anamnese
+        </label>
+        <textarea
+          id="anamnese"
+          name="anamnese"
+          rows={8}
+          placeholder="Histórico, objetivos, restrições, observações clínicas…"
+          defaultValue={initial?.anamnese ?? ""}
+          className="min-h-40 w-full rounded-md border border-white/12 bg-ink px-3 py-2 text-sm leading-relaxed outline-none focus:border-teal/50"
+        />
+      </div>
+
       {error && <p className="sm:col-span-2 text-sm text-red-300">{error}</p>}
 
       <div className="sm:col-span-2">
