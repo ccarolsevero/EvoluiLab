@@ -1,0 +1,280 @@
+"use server";
+
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
+import { mkdir, unlink, writeFile } from "node:fs/promises";
+import path from "node:path";
+import {
+  createAdminSession,
+  destroyAdminSession,
+  isAdminAuthenticated,
+  verifyAdminCredentials,
+} from "@/lib/auth";
+import { prisma } from "@/lib/db";
+import { parseValuesList } from "@/lib/format";
+import type {
+  ClientPaymentStatus,
+  CostType,
+  DocumentKind,
+  PaidBy,
+  PaymentStatus,
+} from "@/generated/prisma";
+
+async function requireAdmin() {
+  if (!(await isAdminAuthenticated())) {
+    redirect("/admin/login");
+  }
+}
+
+export async function loginAction(formData: FormData) {
+  const user = String(formData.get("user") || "").trim();
+  const password = String(formData.get("password") || "");
+
+  if (!verifyAdminCredentials(user, password)) {
+    return { ok: false as const, error: "Usuário ou senha inválidos." };
+  }
+
+  await createAdminSession();
+  redirect("/admin");
+}
+
+export async function logoutAction() {
+  await destroyAdminSession();
+  redirect("/admin/login");
+}
+
+export async function createCostAction(formData: FormData) {
+  await requireAdmin();
+
+  const amount = Number(String(formData.get("amount") || "").replace(",", "."));
+  const description = String(formData.get("description") || "").trim();
+  const paymentDate = String(formData.get("paymentDate") || "");
+  const paymentStatus = String(formData.get("paymentStatus") || "PENDENTE") as PaymentStatus;
+  const paidBy = String(formData.get("paidBy") || "LUANA") as PaidBy;
+  const type = String(formData.get("type") || "CUSTO") as CostType;
+  const observation = String(formData.get("observation") || "").trim();
+
+  if (!Number.isFinite(amount) || amount <= 0 || !description || !paymentDate) {
+    return { ok: false as const, error: "Preencha valor, descrição e data." };
+  }
+
+  await prisma.costEntry.create({
+    data: {
+      amount,
+      description,
+      paymentDate: new Date(`${paymentDate}T12:00:00`),
+      paymentStatus,
+      paidBy,
+      type,
+      observation,
+    },
+  });
+
+  revalidatePath("/admin");
+  revalidatePath("/admin/custos");
+  return { ok: true as const };
+}
+
+export async function updateCostAction(formData: FormData) {
+  await requireAdmin();
+  const id = String(formData.get("id") || "");
+  const amount = Number(String(formData.get("amount") || "").replace(",", "."));
+  const description = String(formData.get("description") || "").trim();
+  const paymentDate = String(formData.get("paymentDate") || "");
+  const paymentStatus = String(formData.get("paymentStatus") || "PENDENTE") as PaymentStatus;
+  const paidBy = String(formData.get("paidBy") || "LUANA") as PaidBy;
+  const type = String(formData.get("type") || "CUSTO") as CostType;
+  const observation = String(formData.get("observation") || "").trim();
+
+  if (!id || !Number.isFinite(amount) || amount <= 0 || !description || !paymentDate) {
+    return { ok: false as const, error: "Dados inválidos." };
+  }
+
+  await prisma.costEntry.update({
+    where: { id },
+    data: {
+      amount,
+      description,
+      paymentDate: new Date(`${paymentDate}T12:00:00`),
+      paymentStatus,
+      paidBy,
+      type,
+      observation,
+    },
+  });
+
+  revalidatePath("/admin");
+  revalidatePath("/admin/custos");
+  return { ok: true as const };
+}
+
+export async function deleteCostAction(formData: FormData) {
+  await requireAdmin();
+  const id = String(formData.get("id") || "");
+  if (!id) return { ok: false as const, error: "ID inválido." };
+  await prisma.costEntry.delete({ where: { id } });
+  revalidatePath("/admin");
+  revalidatePath("/admin/custos");
+  return { ok: true as const };
+}
+
+export async function createClientAction(formData: FormData) {
+  await requireAdmin();
+
+  const name = String(formData.get("name") || "").trim();
+  const hireDate = String(formData.get("hireDate") || "");
+  const service = String(formData.get("service") || "").trim();
+  const valuesRaw = String(formData.get("values") || "");
+  const paymentStatus = String(
+    formData.get("paymentStatus") || "PENDENTE"
+  ) as ClientPaymentStatus;
+  const observation = String(formData.get("observation") || "").trim();
+  const values = parseValuesList(valuesRaw);
+  const totalFromForm = Number(
+    String(formData.get("totalValue") || "").replace(",", ".")
+  );
+  const totalValue =
+    Number.isFinite(totalFromForm) && totalFromForm > 0
+      ? totalFromForm
+      : values.reduce((sum, n) => sum + n, 0);
+
+  if (!name || !hireDate || !service || totalValue <= 0) {
+    return {
+      ok: false as const,
+      error: "Preencha nome, data, serviço e valor total.",
+    };
+  }
+
+  const client = await prisma.client.create({
+    data: {
+      name,
+      hireDate: new Date(`${hireDate}T12:00:00`),
+      service,
+      valuesJson: JSON.stringify(values),
+      totalValue,
+      paymentStatus,
+      observation,
+    },
+  });
+
+  revalidatePath("/admin");
+  revalidatePath("/admin/clientes");
+  redirect(`/admin/clientes/${client.id}`);
+}
+
+export async function updateClientAction(formData: FormData) {
+  await requireAdmin();
+  const id = String(formData.get("id") || "");
+  const name = String(formData.get("name") || "").trim();
+  const hireDate = String(formData.get("hireDate") || "");
+  const service = String(formData.get("service") || "").trim();
+  const valuesRaw = String(formData.get("values") || "");
+  const paymentStatus = String(
+    formData.get("paymentStatus") || "PENDENTE"
+  ) as ClientPaymentStatus;
+  const observation = String(formData.get("observation") || "").trim();
+  const values = parseValuesList(valuesRaw);
+  const totalFromForm = Number(
+    String(formData.get("totalValue") || "").replace(",", ".")
+  );
+  const totalValue =
+    Number.isFinite(totalFromForm) && totalFromForm > 0
+      ? totalFromForm
+      : values.reduce((sum, n) => sum + n, 0);
+
+  if (!id || !name || !hireDate || !service || totalValue <= 0) {
+    return { ok: false as const, error: "Dados inválidos." };
+  }
+
+  await prisma.client.update({
+    where: { id },
+    data: {
+      name,
+      hireDate: new Date(`${hireDate}T12:00:00`),
+      service,
+      valuesJson: JSON.stringify(values),
+      totalValue,
+      paymentStatus,
+      observation,
+    },
+  });
+
+  revalidatePath("/admin");
+  revalidatePath("/admin/clientes");
+  revalidatePath(`/admin/clientes/${id}`);
+  return { ok: true as const };
+}
+
+export async function deleteClientAction(formData: FormData) {
+  await requireAdmin();
+  const id = String(formData.get("id") || "");
+  if (!id) return;
+
+  const docs = await prisma.clientDocument.findMany({ where: { clientId: id } });
+  for (const doc of docs) {
+    const filePath = path.join(process.cwd(), "uploads", "clientes", doc.fileName);
+    try {
+      await unlink(filePath);
+    } catch {
+      // ignore missing files
+    }
+  }
+
+  await prisma.client.delete({ where: { id } });
+  revalidatePath("/admin");
+  revalidatePath("/admin/clientes");
+  redirect("/admin/clientes");
+}
+
+export async function uploadClientDocumentAction(formData: FormData) {
+  await requireAdmin();
+  const clientId = String(formData.get("clientId") || "");
+  const kind = String(formData.get("kind") || "DOCUMENTO") as DocumentKind;
+  const file = formData.get("file");
+
+  if (!clientId || !(file instanceof File) || file.size === 0) {
+    return { ok: false as const, error: "Selecione um arquivo." };
+  }
+
+  const bytes = Buffer.from(await file.arrayBuffer());
+  const safeBase = file.name.replace(/[^a-zA-Z0-9._-]/g, "_");
+  const fileName = `${Date.now()}-${safeBase}`;
+  const dir = path.join(process.cwd(), "uploads", "clientes");
+  await mkdir(dir, { recursive: true });
+  await writeFile(path.join(dir, fileName), bytes);
+
+  await prisma.clientDocument.create({
+    data: {
+      clientId,
+      kind,
+      originalName: file.name,
+      fileName,
+      mimeType: file.type || "application/octet-stream",
+      size: file.size,
+    },
+  });
+
+  revalidatePath(`/admin/clientes/${clientId}`);
+  return { ok: true as const };
+}
+
+export async function deleteClientDocumentAction(formData: FormData) {
+  await requireAdmin();
+  const id = String(formData.get("id") || "");
+  const clientId = String(formData.get("clientId") || "");
+  if (!id) return { ok: false as const, error: "ID inválido." };
+
+  const doc = await prisma.clientDocument.findUnique({ where: { id } });
+  if (!doc) return { ok: false as const, error: "Arquivo não encontrado." };
+
+  const filePath = path.join(process.cwd(), "uploads", "clientes", doc.fileName);
+  try {
+    await unlink(filePath);
+  } catch {
+    // ignore
+  }
+
+  await prisma.clientDocument.delete({ where: { id } });
+  revalidatePath(`/admin/clientes/${clientId || doc.clientId}`);
+  return { ok: true as const };
+}
