@@ -383,7 +383,7 @@ export default function NutricionistasPage() {
           <div className="relative flex min-h-[420px] items-center overflow-hidden py-16 sm:aspect-[21/9] sm:min-h-0 sm:py-0">
             <div aria-hidden className="pointer-events-none absolute inset-0">
               <Image
-                src="/hero/ads-google-advogados.png"
+                src="/hero/ads-google-nutricionistas.png"
                 alt=""
                 fill
                 sizes="100vw"
