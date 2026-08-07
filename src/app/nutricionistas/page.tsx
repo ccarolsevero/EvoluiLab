@@ -204,7 +204,7 @@ export default function NutricionistasPage() {
               priority
               quality={95}
               sizes="100vw"
-              className="object-cover object-[82%_center] sm:object-[78%_center]"
+              className="object-cover object-[80%_12%] sm:object-[78%_8%]"
             />
             <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(20,19,17,0.92)_0%,rgba(20,19,17,0.72)_34%,rgba(20,19,17,0.18)_62%,rgba(20,19,17,0.12)_100%)]" />
             <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(20,19,17,0.12)_0%,rgba(20,19,17,0.35)_100%)]" />
