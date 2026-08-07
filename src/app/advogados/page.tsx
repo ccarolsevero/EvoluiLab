@@ -41,19 +41,20 @@ const heroFeatures = [
 
 const situations = [
   "Ainda não tenho um site profissional.",
-  "Meu site está antigo e não representa meu trabalho.",
-  "Quase não apareço quando pesquisam meu nome no Google.",
-  "Dependo quase só de indicações.",
+  "Meu site está antigo e não representa a qualidade do meu trabalho.",
+  "Quando pesquisam meu nome no Google, encontram poucas informações.",
+  "Meu escritório depende quase só de indicações.",
   "Quero transmitir mais credibilidade online.",
-  "Quero facilitar o contato de novos clientes.",
+  "Quero facilitar o contato de quem procura meus serviços.",
+  "Quero aparecer melhor nas pesquisas do Google.",
 ];
 
 const firstImpression = [
-  "Áreas de atuação",
+  "Quais são suas áreas de atuação",
   "Como entrar em contato",
-  "Localização do escritório",
-  "Quem irá atendê-la",
-  "Um escritório sério e organizado",
+  "Onde o escritório está localizado",
+  "Quem é o profissional que irá atendê-la",
+  "Que existe um escritório sério por trás daquele nome",
 ];
 
 const searchTerms = [
@@ -66,10 +67,10 @@ const searchTerms = [
 ];
 
 const adsHow = [
-  "Campanhas segmentadas para suas áreas de atuação.",
-  "Anúncios para quem já pesquisa por um advogado.",
-  "Landing page pensada para credibilidade e contato.",
-  "Acompanhamento e ajustes contínuos da campanha.",
+  "Criamos campanhas segmentadas para as áreas de atuação do escritório.",
+  "Seus anúncios aparecem para quem já pesquisa por um advogado.",
+  "Direcionamos o clique para uma landing page feita para gerar contato.",
+  "Acompanhamos resultados e ajustamos a campanha continuamente.",
 ];
 
 const siteFeatures = [
@@ -95,22 +96,22 @@ const steps = [
   {
     n: "01",
     title: "Conversamos",
-    text: "Entendemos sua área, o escritório e o objetivo do projeto.",
+    text: "Entendemos sua área de atuação, o escritório e o objetivo do projeto.",
   },
   {
     n: "02",
     title: "Planejamos",
-    text: "Definimos a estrutura ideal para apresentar seus serviços.",
+    text: "Definimos a estrutura ideal para apresentar seus serviços com clareza.",
   },
   {
     n: "03",
     title: "Desenvolvemos",
-    text: "Criamos o design, o conteúdo e o site completo.",
+    text: "Criamos o design, organizamos o conteúdo e desenvolvemos o site.",
   },
   {
     n: "04",
     title: "Publicamos",
-    text: "Seu site fica no ar, pronto para receber novos contatos.",
+    text: "Seu site fica no ar, pronto para receber visitantes e novos contatos.",
   },
 ];
 
@@ -156,15 +157,21 @@ const portfolio = [
 const testimonials = [
   {
     quote:
-      "Transformaram a presença digital do nosso escritório. Hoje temos orgulho de apresentar o site.",
+      "A EvoluiLab transformou a presença digital do nosso escritório. Hoje temos orgulho de apresentar o site aos clientes.",
     name: "Dr. Ricardo Mendes",
     place: "São Paulo • SP",
   },
   {
     quote:
-      "Elegante, rápido e fácil de navegar — exatamente como imaginávamos.",
+      "O projeto ficou elegante, rápido e fácil de navegar — exatamente como imaginávamos.",
     name: "Dra. Camila Souza",
     place: "Curitiba • PR",
+  },
+  {
+    quote:
+      "Além do design, orientaram a melhor forma de apresentar o escritório e as áreas de atuação.",
+    name: "Dr. Felipe Andrade",
+    place: "Belo Horizonte • MG",
   },
 ];
 
@@ -228,8 +235,10 @@ export default function AdvogadosPage() {
                   <span className="text-teal">oportunidades de negócio</span>.
                 </h1>
                 <p className="mt-8 max-w-2xl text-base leading-relaxed text-mist/55 sm:mt-9 sm:text-lg">
-                  Sites e landing pages exclusivos para transmitir
-                  profissionalismo, aparecer no Google e facilitar o contato.
+                  Desenvolvemos sites e landing pages exclusivos para advogados
+                  que desejam apresentar seus serviços com mais profissionalismo,
+                  aparecer melhor no Google e facilitar o contato de clientes em
+                  potencial.
                 </p>
               </Reveal>
 
@@ -271,11 +280,12 @@ export default function AdvogadosPage() {
                   Projetos
                 </p>
                 <h2 className="mt-4 font-display text-[clamp(1.8rem,3.5vw,2.8rem)] leading-[1.1] font-medium tracking-[-0.03em]">
-                  Projetos para advogados
+                  Conheça alguns projetos para advogados
                 </h2>
-                <p className="mt-4 max-w-2xl text-base leading-relaxed text-mist/60">
-                  Cada site é personalizado para transmitir a credibilidade que a
-                  advocacia exige.
+                <p className="mt-5 max-w-2xl text-base leading-relaxed text-mist/60">
+                  O site é onde muitas pessoas formam a primeira impressão sobre
+                  você e seu escritório. Por isso, cada projeto é personalizado —
+                  com identidade própria e a credibilidade que a advocacia exige.
                 </p>
               </Reveal>
 
@@ -333,6 +343,11 @@ export default function AdvogadosPage() {
                 <h2 className="mt-4 font-display text-[clamp(1.8rem,3.5vw,2.8rem)] leading-[1.1] font-medium tracking-[-0.03em]">
                   Você se identifica com alguma dessas situações?
                 </h2>
+                <p className="mt-5 text-base leading-relaxed text-mist/60">
+                  Se respondeu &quot;sim&quot; para algumas delas, talvez seja o
+                  momento de investir em um site que represente melhor o seu
+                  escritório.
+                </p>
               </Reveal>
 
               <Stagger as="ul" className="space-y-3" stagger={0.05}>
@@ -356,12 +371,18 @@ export default function AdvogadosPage() {
           <div className="section-pad">
             <div className="container-site max-w-3xl">
               <Reveal>
-                <h2 className="font-display text-[clamp(1.8rem,3.5vw,2.8rem)] leading-[1.1] font-medium tracking-[-0.03em]">
+                <p className="text-base leading-relaxed text-mist/65 sm:text-lg">
+                  Você dedica anos ao Direito e oferece um atendimento de
+                  qualidade. Sua presença na internet também precisa transmitir
+                  essa confiança.
+                </p>
+                <h2 className="mt-8 font-display text-[clamp(1.8rem,3.5vw,2.8rem)] leading-[1.1] font-medium tracking-[-0.03em]">
                   A primeira impressão importa
                 </h2>
-                <p className="mt-4 text-base leading-relaxed text-mist/60">
-                  Quando alguém pesquisa seu nome no Google, o site precisa
-                  transmitir organização e confiança — e deixar claro:
+                <p className="mt-5 text-base leading-relaxed text-mist/60">
+                  Quando alguém pesquisa seu nome no Google e encontra um site
+                  organizado, a chance de contato aumenta. Um bom site deixa
+                  claro rapidamente:
                 </p>
               </Reveal>
 
@@ -371,6 +392,9 @@ export default function AdvogadosPage() {
                     <CheckItem key={item}>{item}</CheckItem>
                   ))}
                 </ul>
+                <p className="mt-7 text-base leading-relaxed text-mist/60">
+                  É exatamente essa experiência que desenvolvemos.
+                </p>
                 <a href={WA} target="_blank" rel="noopener noreferrer" className="btn-primary mt-8 inline-flex">
                   Quero meu site
                 </a>
@@ -405,9 +429,9 @@ export default function AdvogadosPage() {
                   <h2 className="mt-4 font-display text-[clamp(1.8rem,3.5vw,2.8rem)] leading-[1.1] font-medium tracking-[-0.03em]">
                     Seja encontrado por quem já procura um advogado
                   </h2>
-                  <p className="mt-4 max-w-2xl text-base leading-relaxed text-mist/60 sm:text-lg">
-                    Com Google Ads, seu escritório aparece para quem já está
-                    buscando os serviços que você oferece.
+                  <p className="mt-5 max-w-2xl text-base leading-relaxed text-mist/60 sm:text-lg">
+                    Ter um site profissional é o primeiro passo. O segundo é
+                    fazer com que as pessoas certas encontrem o seu escritório.
                   </p>
                 </Reveal>
                 <Reveal delay={100}>
@@ -449,7 +473,12 @@ export default function AdvogadosPage() {
                 </Reveal>
 
                 <Reveal delay={120} className="mt-10">
-                  <h3 className="font-display text-xl font-medium tracking-[-0.02em]">
+                  <p className="text-base leading-relaxed text-mist/60">
+                    Essas pessoas já sabem que precisam de um advogado. Com
+                    Google Ads, seu escritório aparece no momento certo — para
+                    quem já busca os serviços que você oferece.
+                  </p>
+                  <h3 className="mt-10 font-display text-xl font-medium tracking-[-0.02em]">
                     Como funciona
                   </h3>
                   <ul className="mt-5 space-y-3">
@@ -464,11 +493,13 @@ export default function AdvogadosPage() {
                   className="mt-12 border border-teal/25 bg-ink/70 p-6 sm:p-8"
                 >
                   <h3 className="font-display text-xl font-medium tracking-[-0.02em] sm:text-2xl">
-                    Site + Google Ads
+                    Site + Google Ads: uma estratégia completa
                   </h3>
                   <p className="mt-4 text-base leading-relaxed text-mist/60">
-                    O anúncio atrai a visita. O site transmite confiança e
-                    transforma essa visita em contato.
+                    Não basta aparecer no Google. Quando alguém clica no anúncio,
+                    precisa encontrar um escritório que transmita confiança. O
+                    anúncio atrai a visita; o site ajuda a transformar essa
+                    visita em contato.
                   </p>
                   <a
                     href={WA_ADS}
@@ -494,10 +525,15 @@ export default function AdvogadosPage() {
               <h2 className="mt-4 font-display text-[clamp(1.8rem,3.5vw,2.8rem)] leading-[1.1] font-medium tracking-[-0.03em]">
                 Sites feitos para transmitir credibilidade
               </h2>
+              <p className="mt-5 text-base leading-relaxed text-mist/60">
+                Um site não deve existir só para dizer que o escritório está na
+                internet. Ele precisa transmitir a mesma credibilidade de uma
+                reunião com o cliente.
+              </p>
               <p className="mt-4 text-base leading-relaxed text-mist/60">
-                Sem modelos prontos. Cada projeto apresenta o escritório com
-                clareza e profissionalismo — a mesma confiança de uma reunião
-                presencial.
+                Sem modelos prontos e sem layouts genéricos: cada projeto
+                apresenta o escritório com clareza, organização e
+                profissionalismo.
               </p>
             </Reveal>
           </div>
@@ -514,6 +550,10 @@ export default function AdvogadosPage() {
                 <h2 className="mt-4 font-display text-[clamp(1.8rem,3.5vw,2.8rem)] leading-[1.1] font-medium tracking-[-0.03em]">
                   O que seu site pode ter
                 </h2>
+                <p className="mt-5 text-base leading-relaxed text-mist/60">
+                  Tudo o que o escritório precisa para uma experiência
+                  profissional desde o primeiro acesso.
+                </p>
               </Reveal>
 
               <Stagger
@@ -551,6 +591,10 @@ export default function AdvogadosPage() {
                 <h2 className="mt-4 font-display text-[clamp(1.8rem,3.5vw,2.8rem)] leading-[1.1] font-medium tracking-[-0.03em]">
                   Como funciona
                 </h2>
+                <p className="mt-5 text-base leading-relaxed text-mist/60">
+                  Um processo simples para ter um site profissional sem
+                  complicação.
+                </p>
               </Reveal>
 
               <Stagger
@@ -639,12 +683,15 @@ export default function AdvogadosPage() {
           <div className="section-pad relative">
             <Reveal className="container-site max-w-3xl text-center">
               <h2 className="font-display text-[clamp(1.9rem,3.8vw,3rem)] leading-[1.1] font-medium tracking-[-0.03em]">
-                Pronto para elevar a presença digital do seu escritório?
+                Seu escritório merece uma presença digital à altura da sua
+                atuação
               </h2>
-              <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-mist/60">
-                Vamos criar um site à altura da sua atuação.
+              <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-mist/60">
+                Antes do contato, muitas pessoas pesquisam no Google. Quando
+                encontrarem o seu escritório, a primeira impressão deve
+                transmitir a mesma credibilidade do seu atendimento.
               </p>
-              <Button asChild size="lg" className="mt-8 h-11 rounded-md px-7">
+              <Button asChild size="lg" className="mt-9 h-11 rounded-md px-7">
                 <a href={WA} target="_blank" rel="noopener noreferrer">Quero meu site</a>
               </Button>
             </Reveal>
@@ -658,7 +705,9 @@ export default function AdvogadosPage() {
             <div>
               <Logo href="/" />
               <p className="mt-4 max-w-md text-sm leading-relaxed text-mist/50">
-                Especialistas em sites para advogados.
+                Especialistas em sites e landing pages para advogados.
+                Projetos exclusivos para transmitir credibilidade e facilitar o
+                contato com novos clientes.
               </p>
             </div>
             <div className="sm:text-right">

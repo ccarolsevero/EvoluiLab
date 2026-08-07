@@ -9,28 +9,36 @@ import {
 
 const faqs = [
   {
-    q: "Vocês fazem só sites para advogados?",
-    a: "Sim. Somos especializados em sites e landing pages para advocacia.",
+    q: "Vocês desenvolvem sites apenas para advogados?",
+    a: "Somos especialistas em sites e landing pages para advogados e escritórios de advocacia, com projetos alinhados à imagem da profissão.",
   },
   {
-    q: "Já tenho site. Vocês reformulam?",
-    a: "Sim. Modernizamos visual, conteúdo e estrutura.",
+    q: "Meu escritório já possui um site. Vocês fazem reformulações?",
+    a: "Sim. Podemos modernizar o visual, reorganizar o conteúdo e atualizar a estrutura do seu site.",
   },
   {
-    q: "O site funciona no celular?",
-    a: "Sim. Todos os projetos são responsivos.",
+    q: "Também desenvolvem landing pages para Google Ads?",
+    a: "Sim. Criamos páginas específicas para campanhas, pensadas para clareza e contato.",
   },
   {
-    q: "Dá para integrar WhatsApp e SEO?",
-    a: "Sim. Incluímos WhatsApp e boas práticas de SEO.",
+    q: "Meu site funcionará no celular?",
+    a: "Sim. Todos os projetos são responsivos — computador, tablet e smartphone.",
+  },
+  {
+    q: "Posso integrar WhatsApp ao site?",
+    a: "Sim. O WhatsApp pode ser integrado para facilitar o contato com o escritório.",
+  },
+  {
+    q: "Meu site poderá aparecer no Google?",
+    a: "Sim. Seguimos boas práticas de SEO para indexação e presença nas buscas.",
   },
   {
     q: "Vocês fazem Google Ads?",
-    a: "Sim. Também criamos campanhas e landing pages para Ads.",
+    a: "Sim. Além do site, também desenvolvemos campanhas de Google Ads.",
   },
   {
-    q: "Quanto custa e quanto tempo leva?",
-    a: "Cada projeto é sob medida. Envie uma mensagem e montamos a proposta com prazo.",
+    q: "Quanto tempo leva e quanto custa?",
+    a: "Prazo e investimento dependem da estrutura do projeto. Entre em contato para receber uma proposta.",
   },
 ];
 
