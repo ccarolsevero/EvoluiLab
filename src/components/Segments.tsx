@@ -98,7 +98,7 @@ function SegmentItem({
 
   const content = (
     <>
-      <span className="text-mist/35 transition group-hover:text-mist/70">{icon}</span>
+      <span className="text-teal/55 transition group-hover:text-teal">{icon}</span>
       <span className="text-sm font-medium tracking-wide">{label}</span>
     </>
   );
@@ -120,7 +120,7 @@ export function Segments() {
       <div className="section-pad">
         <div className="container-site">
           <Reveal >
-            <p className="text-center font-display text-[0.7rem] font-medium tracking-[0.22em] text-mist/40 uppercase">
+            <p className="text-center font-display text-[0.7rem] font-medium tracking-[0.22em] text-teal uppercase">
               Especialistas em sites para profissionais
             </p>
           </Reveal>

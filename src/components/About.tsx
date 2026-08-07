@@ -32,13 +32,14 @@ export function About() {
       <div className="section-pad">
         <div className="container-site grid gap-16 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-20">
           <Reveal  className="lg:sticky lg:top-28 lg:self-start">
-            <p className="font-display text-[0.7rem] font-medium tracking-[0.22em] text-mist/45 uppercase">
+            <p className="font-display text-[0.7rem] font-medium tracking-[0.22em] text-teal uppercase">
               Sobre
             </p>
             <h2 className="mt-5 font-display text-[clamp(2rem,3.8vw,3.25rem)] leading-[1.08] font-medium tracking-[-0.035em]">
               Menos amadorismo.
               <br />
-              Mais presença que vende.
+              Mais presença que{" "}
+              <span className="text-teal">vende</span>.
             </h2>
             <p className="mt-6 max-w-md text-base leading-relaxed text-mist/55">
               A EvoluiLab une design, tecnologia e conversão para criar presença
@@ -51,7 +52,7 @@ export function About() {
               <StaggerItem key={item.title} as="li">
                 {i > 0 && <Separator className="bg-white/8" />}
                 <div className="grid gap-3 py-7 sm:grid-cols-[7rem_1fr] sm:gap-8">
-                  <span className="font-display text-sm text-mist/35 tabular-nums">
+                  <span className="font-display text-sm text-teal/60 tabular-nums">
                     0{i + 1}
                   </span>
                   <div>

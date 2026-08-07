@@ -28,7 +28,7 @@ export function Services() {
       <div className="section-pad">
         <div className="container-site">
           <Reveal className="max-w-2xl" >
-            <p className="font-display text-[0.7rem] font-medium tracking-[0.22em] text-mist/45 uppercase">
+            <p className="font-display text-[0.7rem] font-medium tracking-[0.22em] text-teal uppercase">
               Serviços
             </p>
             <h2 className="mt-5 font-display text-[clamp(2rem,3.8vw,3.25rem)] leading-[1.08] font-medium tracking-[-0.035em]">
@@ -43,7 +43,7 @@ export function Services() {
                   href="#contato"
                   className="group grid items-baseline gap-4 border-t border-white/8 py-8 transition-colors sm:grid-cols-[5rem_1fr_auto] sm:gap-10 sm:py-10"
                 >
-                  <span className="font-display text-sm text-mist/30 tabular-nums">
+                  <span className="font-display text-sm text-teal/55 tabular-nums">
                     0{index + 1}
                   </span>
                   <div>
@@ -54,7 +54,7 @@ export function Services() {
                       {service.text}
                     </p>
                   </div>
-                  <ArrowUpRight className="mt-1 hidden size-5 text-mist/25 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-mist/70 sm:block" />
+                  <ArrowUpRight className="mt-1 hidden size-5 text-teal/35 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-teal sm:block" />
                 </a>
               </StaggerItem>
             ))}

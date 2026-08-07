@@ -30,7 +30,7 @@ export function Testimonials() {
       <div className="section-pad">
         <div className="container-site">
           <Reveal className="max-w-2xl" >
-            <p className="font-display text-[0.7rem] font-medium tracking-[0.22em] text-mist/45 uppercase">
+            <p className="font-display text-[0.7rem] font-medium tracking-[0.22em] text-teal uppercase">
               Depoimentos
             </p>
             <h2 className="mt-5 font-display text-[clamp(2rem,3.8vw,3.25rem)] leading-[1.08] font-medium tracking-[-0.035em]">
@@ -43,13 +43,19 @@ export function Testimonials() {
               <StaggerItem key={item.name} as="li">
                 {i > 0 && <Separator className="my-10 bg-white/8 sm:my-12" />}
                 <blockquote>
-                  <p className="font-display text-[clamp(1.25rem,2.4vw,1.85rem)] leading-[1.35] font-medium tracking-[-0.025em] text-mist/90">
+                  <p className="text-teal/70" aria-hidden>
+                    ★★★★★
+                  </p>
+                  <p className="mt-4 font-display text-[clamp(1.25rem,2.4vw,1.85rem)] leading-[1.35] font-medium tracking-[-0.025em] text-mist/90">
                     “{item.quote}”
                   </p>
                   <footer className="mt-6 flex flex-wrap items-baseline gap-x-3 gap-y-1">
                     <cite className="font-display text-base font-medium not-italic">
                       {item.name}
                     </cite>
+                    <span className="text-teal/40" aria-hidden>
+                      ·
+                    </span>
                     <span className="text-sm text-mist/40">{item.role}</span>
                   </footer>
                 </blockquote>

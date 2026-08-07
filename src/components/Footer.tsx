@@ -28,7 +28,7 @@ export function Footer() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-sm text-mist/45 transition hover:text-mist"
+                  className="text-sm text-mist/45 transition hover:text-teal"
                 >
                   {link.label}
                 </Link>
@@ -39,7 +39,7 @@ export function Footer() {
         <Reveal delay={80}>
           <div className="container-site mt-12 flex flex-col gap-2 border-t border-white/6 pt-6 text-xs text-mist/30 sm:flex-row sm:justify-between">
             <p>© {new Date().getFullYear()} EvoluiLab. Todos os direitos reservados.</p>
-            <p>Estratégia · Tecnologia · Resultados</p>
+            <p className="text-teal/45">Estratégia · Tecnologia · Resultados</p>
           </div>
         </Reveal>
       </div>

@@ -31,7 +31,7 @@ export function Process() {
       <div className="section-pad">
         <div className="container-site">
           <Reveal className="max-w-2xl" >
-            <p className="font-display text-[0.7rem] font-medium tracking-[0.22em] text-mist/45 uppercase">
+            <p className="font-display text-[0.7rem] font-medium tracking-[0.22em] text-teal uppercase">
               Processo
             </p>
             <h2 className="mt-5 font-display text-[clamp(2rem,3.8vw,3.25rem)] leading-[1.08] font-medium tracking-[-0.035em]">
@@ -46,9 +46,10 @@ export function Process() {
           >
             {steps.map((item) => (
               <StaggerItem key={item.step} as="li" className="relative">
-                <p className="font-display text-5xl font-medium tracking-[-0.05em] text-mist/10 sm:text-6xl">
+                <p className="font-display text-5xl font-medium tracking-[-0.05em] text-teal/20 sm:text-6xl">
                   {item.step}
                 </p>
+                <div className="mt-4 h-px w-8 bg-teal/50" aria-hidden />
                 <h3 className="mt-4 font-display text-xl font-medium tracking-[-0.02em]">
                   {item.title}
                 </h3>

@@ -32,22 +32,23 @@ export function Contact() {
     <section id="contato" className="relative overflow-hidden border-t border-white/6 py-24 sm:py-32">
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(240,235,227,0.05),transparent_55%)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(196,165,116,0.1),transparent_55%)]"
       />
       <div className="section-pad relative">
         <div className="container-site grid gap-14 lg:grid-cols-[1fr_0.95fr] lg:items-start lg:gap-20">
           <Reveal >
-            <p className="font-display text-[0.7rem] font-medium tracking-[0.22em] text-mist/45 uppercase">
+            <p className="font-display text-[0.7rem] font-medium tracking-[0.22em] text-teal uppercase">
               Contato
             </p>
             <h2 className="mt-5 font-display text-[clamp(2rem,3.8vw,3.4rem)] leading-[1.08] font-medium tracking-[-0.035em]">
-              Vamos fazer sua presença digital evoluir
+              Vamos fazer sua presença digital{" "}
+              <span className="text-teal">evoluir</span>
             </h2>
             <p className="mt-6 max-w-md text-base leading-relaxed text-mist/55">
               Conte um pouco do seu negócio. Retornamos com o melhor caminho
               para site, landing ou sistema.
             </p>
-            <p className="mt-10 text-sm tracking-wide text-mist/35">
+            <p className="mt-10 text-sm tracking-wide text-teal/55">
               Estratégia · Tecnologia · Resultados
             </p>
           </Reveal>
@@ -55,7 +56,7 @@ export function Contact() {
           <Reveal delay={100}>
             <form
               onSubmit={onSubmit}
-              className="border border-white/10 bg-elevated/80 p-6 sm:p-8"
+              className="border border-teal/20 bg-elevated/80 p-6 sm:p-8"
             >
               <div className="grid gap-5">
                 <div className="grid gap-2">
