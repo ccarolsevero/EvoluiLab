@@ -60,8 +60,9 @@ model Client {
   id            String              @id @default(cuid())
   name          String
   hireDate      DateTime
+  /// Resumo dos nomes dos serviços (para busca/listagem), ex.: "Site · Landing"
   service       String
-  /// JSON array of line values, e.g. [1500, 500]
+  /// JSON: [{ "name": "Site", "amount": 1500 }, ...] — legado: [1500, 500]
   valuesJson    String              @default("[]")
   totalValue    Float
   paymentStatus ClientPaymentStatus @default(PENDENTE)

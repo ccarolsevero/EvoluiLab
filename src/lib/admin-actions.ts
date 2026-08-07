@@ -11,7 +11,10 @@ import {
   verifyAdminCredentials,
 } from "@/lib/auth";
 import { prisma } from "@/lib/db";
-import { parseValuesList } from "@/lib/format";
+import {
+  servicesFromFormData,
+  summarizeServices,
+} from "@/lib/client-services";
 import type {
   ClientPaymentStatus,
   CostType,
@@ -181,25 +184,18 @@ export async function createClientAction(formData: FormData) {
 
   const name = String(formData.get("name") || "").trim();
   const hireDate = String(formData.get("hireDate") || "");
-  const service = String(formData.get("service") || "").trim();
-  const valuesRaw = String(formData.get("values") || "");
   const paymentStatus = String(
     formData.get("paymentStatus") || "PENDENTE"
   ) as ClientPaymentStatus;
   const observation = String(formData.get("observation") || "").trim();
-  const values = parseValuesList(valuesRaw);
-  const totalFromForm = Number(
-    String(formData.get("totalValue") || "").replace(",", ".")
+  const { lines, serviceLabel, totalValue, valuesJson } = summarizeServices(
+    servicesFromFormData(formData)
   );
-  const totalValue =
-    Number.isFinite(totalFromForm) && totalFromForm > 0
-      ? totalFromForm
-      : values.reduce((sum, n) => sum + n, 0);
 
-  if (!name || !hireDate || !service || totalValue <= 0) {
+  if (!name || !hireDate || lines.length === 0 || totalValue <= 0) {
     return {
       ok: false as const,
-      error: "Preencha nome, data, serviço e valor total.",
+      error: "Preencha nome, data e ao menos um serviço com valor.",
     };
   }
 
@@ -207,8 +203,8 @@ export async function createClientAction(formData: FormData) {
     data: {
       name,
       hireDate: new Date(`${hireDate}T12:00:00`),
-      service,
-      valuesJson: JSON.stringify(values),
+      service: serviceLabel,
+      valuesJson,
       totalValue,
       paymentStatus,
       observation,
@@ -225,23 +221,19 @@ export async function updateClientAction(formData: FormData) {
   const id = String(formData.get("id") || "");
   const name = String(formData.get("name") || "").trim();
   const hireDate = String(formData.get("hireDate") || "");
-  const service = String(formData.get("service") || "").trim();
-  const valuesRaw = String(formData.get("values") || "");
   const paymentStatus = String(
     formData.get("paymentStatus") || "PENDENTE"
   ) as ClientPaymentStatus;
   const observation = String(formData.get("observation") || "").trim();
-  const values = parseValuesList(valuesRaw);
-  const totalFromForm = Number(
-    String(formData.get("totalValue") || "").replace(",", ".")
+  const { lines, serviceLabel, totalValue, valuesJson } = summarizeServices(
+    servicesFromFormData(formData)
   );
-  const totalValue =
-    Number.isFinite(totalFromForm) && totalFromForm > 0
-      ? totalFromForm
-      : values.reduce((sum, n) => sum + n, 0);
 
-  if (!id || !name || !hireDate || !service || totalValue <= 0) {
-    return { ok: false as const, error: "Dados inválidos." };
+  if (!id || !name || !hireDate || lines.length === 0 || totalValue <= 0) {
+    return {
+      ok: false as const,
+      error: "Preencha nome, data e ao menos um serviço com valor.",
+    };
   }
 
   await prisma.client.update({
@@ -249,8 +241,8 @@ export async function updateClientAction(formData: FormData) {
     data: {
       name,
       hireDate: new Date(`${hireDate}T12:00:00`),
-      service,
-      valuesJson: JSON.stringify(values),
+      service: serviceLabel,
+      valuesJson,
       totalValue,
       paymentStatus,
       observation,

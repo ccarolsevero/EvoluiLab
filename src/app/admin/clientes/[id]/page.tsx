@@ -6,6 +6,7 @@ import { DocumentUpload } from "@/components/admin/DocumentUpload";
 import { deleteClientAction } from "@/lib/admin-actions";
 import { labelClientPayment } from "@/lib/admin-labels";
 import { prisma } from "@/lib/db";
+import { parseClientServices } from "@/lib/client-services";
 import { formatCurrency, formatDate } from "@/lib/format";
 
 export const dynamic = "force-dynamic";
@@ -23,7 +24,11 @@ export default async function ClienteDetailPage({
 
   if (!client) notFound();
 
-  const values = JSON.parse(client.valuesJson || "[]") as number[];
+  const services = parseClientServices(
+    client.valuesJson,
+    client.service,
+    client.totalValue
+  ).filter((line) => line.name && line.amount > 0);
 
   return (
     <>
@@ -41,8 +46,9 @@ export default async function ClienteDetailPage({
               {client.name}
             </h1>
             <p className="mt-2 text-sm text-mist/55">
-              {client.service} · {formatDate(client.hireDate)} ·{" "}
+              {formatDate(client.hireDate)} ·{" "}
               {labelClientPayment(client.paymentStatus)}
+              {services.length > 1 ? ` · ${services.length} serviços` : ""}
             </p>
           </div>
           <div className="text-right">
@@ -64,17 +70,20 @@ export default async function ClienteDetailPage({
           </div>
         </div>
 
-        {values.length > 0 && (
-          <div className="mt-6 flex flex-wrap gap-2">
-            {values.map((value, index) => (
-              <span
-                key={`${value}-${index}`}
-                className="border border-white/10 px-3 py-1.5 text-sm text-mist/70"
+        {services.length > 0 && (
+          <ul className="mt-6 space-y-2">
+            {services.map((line, index) => (
+              <li
+                key={`${line.name}-${index}`}
+                className="flex items-center justify-between gap-4 border border-white/10 px-4 py-3 text-sm"
               >
-                Parcela/item {index + 1}: {formatCurrency(value)}
-              </span>
+                <span className="text-mist/80">{line.name}</span>
+                <span className="font-display text-teal">
+                  {formatCurrency(line.amount)}
+                </span>
+              </li>
             ))}
-          </div>
+          </ul>
         )}
 
         {client.observation && (

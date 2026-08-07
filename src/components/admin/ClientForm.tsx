@@ -1,11 +1,15 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState, useTransition } from "react";
+import { useMemo, useState, useTransition } from "react";
 import { CLIENT_PAYMENT_OPTIONS } from "@/lib/admin-labels";
 import { createClientAction, updateClientAction } from "@/lib/admin-actions";
+import {
+  parseClientServices,
+  type ClientServiceLine,
+} from "@/lib/client-services";
 import type { Client } from "@/generated/prisma";
-import { toDateInputValue } from "@/lib/format";
+import { formatCurrency, toDateInputValue } from "@/lib/format";
 
 const field =
   "h-10 w-full rounded-md border border-white/12 bg-ink px-3 text-sm outline-none focus:border-teal/50";
@@ -20,9 +24,43 @@ export function ClientForm({ initial = null, mode = "create" }: Props) {
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
   const [pending, startTransition] = useTransition();
-  const valuesDefault = initial
-    ? (JSON.parse(initial.valuesJson || "[]") as number[]).join(", ")
-    : "";
+  const [services, setServices] = useState<ClientServiceLine[]>(() =>
+    parseClientServices(
+      initial?.valuesJson,
+      initial?.service ?? "",
+      initial?.totalValue ?? 0
+    )
+  );
+
+  const totalValue = useMemo(
+    () =>
+      services.reduce(
+        (sum, line) =>
+          sum +
+          (Number.isFinite(line.amount) && line.amount > 0 ? line.amount : 0),
+        0
+      ),
+    [services]
+  );
+
+  function updateService(
+    index: number,
+    patch: Partial<ClientServiceLine>
+  ) {
+    setServices((prev) =>
+      prev.map((line, i) => (i === index ? { ...line, ...patch } : line))
+    );
+  }
+
+  function addService() {
+    setServices((prev) => [...prev, { name: "", amount: 0 }]);
+  }
+
+  function removeService(index: number) {
+    setServices((prev) =>
+      prev.length <= 1 ? prev : prev.filter((_, i) => i !== index)
+    );
+  }
 
   return (
     <form
@@ -39,7 +77,6 @@ export function ClientForm({ initial = null, mode = "create" }: Props) {
             router.refresh();
             return;
           }
-          // create redirects on success
           const result = await createClientAction(formData);
           if (result && !result.ok) setError(result.error);
         });
@@ -75,46 +112,79 @@ export function ClientForm({ initial = null, mode = "create" }: Props) {
       </div>
 
       <div className="sm:col-span-2">
-        <label className={labelCls} htmlFor="service">
-          Serviço
-        </label>
-        <input
-          id="service"
-          name="service"
-          required
-          placeholder="Ex.: Site institucional + landing"
-          defaultValue={initial?.service ?? ""}
-          className={field}
-        />
-      </div>
+        <div className="mb-2 flex items-center justify-between gap-3">
+          <label className={labelCls + " mb-0"}>Serviços</label>
+          <button
+            type="button"
+            onClick={addService}
+            className="text-xs tracking-wide text-teal hover:text-mist"
+          >
+            + Adicionar serviço
+          </button>
+        </div>
 
-      <div>
-        <label className={labelCls} htmlFor="values">
-          Valores (separados por vírgula)
-        </label>
-        <input
-          id="values"
-          name="values"
-          placeholder="1500, 500, 300"
-          defaultValue={valuesDefault}
-          className={field}
-        />
-      </div>
+        <div className="space-y-3">
+          {services.map((line, index) => (
+            <div
+              key={index}
+              className="grid gap-3 border border-white/8 bg-ink/40 p-3 sm:grid-cols-[1fr_9rem_auto]"
+            >
+              <div>
+                <label className={labelCls} htmlFor={`serviceName-${index}`}>
+                  Serviço {index + 1}
+                </label>
+                <input
+                  id={`serviceName-${index}`}
+                  name="serviceName"
+                  required
+                  placeholder="Ex.: Site institucional"
+                  value={line.name}
+                  onChange={(e) =>
+                    updateService(index, { name: e.target.value })
+                  }
+                  className={field}
+                />
+              </div>
+              <div>
+                <label className={labelCls} htmlFor={`serviceAmount-${index}`}>
+                  Valor (R$)
+                </label>
+                <input
+                  id={`serviceAmount-${index}`}
+                  name="serviceAmount"
+                  type="number"
+                  step="0.01"
+                  min="0"
+                  required
+                  value={line.amount || ""}
+                  onChange={(e) =>
+                    updateService(index, {
+                      amount: Number(e.target.value.replace(",", ".")),
+                    })
+                  }
+                  className={field}
+                />
+              </div>
+              <div className="flex items-end">
+                <button
+                  type="button"
+                  onClick={() => removeService(index)}
+                  disabled={services.length <= 1}
+                  className="h-10 px-2 text-xs text-mist/45 hover:text-red-300 disabled:cursor-not-allowed disabled:opacity-30"
+                >
+                  Remover
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
 
-      <div>
-        <label className={labelCls} htmlFor="totalValue">
-          Valor total (R$)
-        </label>
-        <input
-          id="totalValue"
-          name="totalValue"
-          type="number"
-          step="0.01"
-          min="0"
-          required
-          defaultValue={initial?.totalValue ?? ""}
-          className={field}
-        />
+        <p className="mt-3 text-sm text-mist/55">
+          Valor total:{" "}
+          <span className="font-display text-base text-teal">
+            {formatCurrency(totalValue)}
+          </span>
+        </p>
       </div>
 
       <div>
