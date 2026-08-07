@@ -196,11 +196,19 @@ export default function NutricionistasPage() {
 
       <main>
         {/* Hero */}
-        <section className="relative overflow-hidden pt-28 pb-20 sm:pt-32 sm:pb-28">
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_20%_0%,rgba(196,165,116,0.12),transparent_45%),linear-gradient(180deg,#141311_0%,#1a1916_100%)]"
-          />
+        <section className="relative min-h-[72svh] overflow-hidden pt-28 pb-20 sm:min-h-[76svh] sm:pt-32 sm:pb-28">
+          <div aria-hidden className="pointer-events-none absolute inset-0">
+            <Image
+              src="/hero/hero-nutricionistas.png"
+              alt=""
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover object-[88%_top] sm:object-[80%_8%]"
+            />
+            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(20,19,17,0.95)_0%,rgba(20,19,17,0.8)_36%,rgba(20,19,17,0.28)_68%,rgba(20,19,17,0.38)_100%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_18%_0%,rgba(196,165,116,0.12),transparent_45%),linear-gradient(180deg,rgba(20,19,17,0.2)_0%,rgba(20,19,17,0.68)_100%)]" />
+          </div>
           <div className="grain" />
           <div className="section-pad relative">
             <div className="container-site">
@@ -378,26 +386,45 @@ export default function NutricionistasPage() {
 
         {/* Google Ads */}
         <section id="google-ads" className="relative">
-          <div className="relative overflow-hidden border-b border-white/6 py-16 sm:py-20">
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_18%_0%,rgba(196,165,116,0.12),transparent_45%),linear-gradient(180deg,#141311_0%,#1a1916_100%)]"
-            />
+          <div className="relative flex min-h-[420px] items-center overflow-hidden py-16 sm:aspect-[21/9] sm:min-h-0 sm:py-0">
+            <div aria-hidden className="pointer-events-none absolute inset-0">
+              <Image
+                src="/hero/hero-nutricionistas.png"
+                alt=""
+                fill
+                sizes="100vw"
+                className="object-cover object-[92%_62%] sm:object-[88%_58%]"
+              />
+              <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(20,19,17,0.96)_0%,rgba(20,19,17,0.82)_32%,rgba(20,19,17,0.22)_62%,rgba(20,19,17,0.35)_100%)]" />
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_18%_0%,rgba(196,165,116,0.1),transparent_45%),linear-gradient(180deg,rgba(20,19,17,0.15)_0%,rgba(20,19,17,0.55)_100%)]" />
+            </div>
             <div className="grain" />
-            <div className="section-pad relative">
-              <div className="container-site max-w-3xl">
-                <Reveal>
-                  <p className="font-display text-[0.7rem] font-medium tracking-[0.22em] text-teal uppercase">
-                    Google Ads
-                  </p>
-                  <h2 className="mt-4 font-display text-[clamp(1.8rem,3.5vw,2.8rem)] leading-[1.1] font-medium tracking-[-0.03em]">
-                    Seja encontrada por quem já está procurando uma nutricionista
-                  </h2>
-                  <p className="mt-5 max-w-2xl text-base leading-relaxed text-mist/60 sm:text-lg">
-                    Ter um site profissional é o primeiro passo. O segundo é
-                    fazer com que as pessoas certas encontrem você.
-                  </p>
-                </Reveal>
+            <div className="section-pad relative w-full py-10 sm:py-14">
+              <div className="container-site">
+                <div className="max-w-3xl">
+                  <Reveal>
+                    <p className="font-display text-[0.7rem] font-medium tracking-[0.22em] text-teal uppercase">
+                      Google Ads
+                    </p>
+                    <h2 className="mt-4 font-display text-[clamp(1.8rem,3.5vw,2.8rem)] leading-[1.1] font-medium tracking-[-0.03em]">
+                      Seja encontrada por quem já está procurando uma nutricionista
+                    </h2>
+                    <p className="mt-5 max-w-2xl text-base leading-relaxed text-mist/60 sm:text-lg">
+                      Ter um site profissional é o primeiro passo. O segundo é
+                      fazer com que as pessoas certas encontrem você.
+                    </p>
+                  </Reveal>
+                  <Reveal delay={100}>
+                    <a
+                      href={WA_ADS}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn-primary mt-9 inline-flex"
+                    >
+                      Quero atrair mais pacientes pelo Google
+                    </a>
+                  </Reveal>
+                </div>
               </div>
             </div>
           </div>
