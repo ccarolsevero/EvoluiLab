@@ -202,6 +202,7 @@ export default function NutricionistasPage() {
               alt=""
               fill
               priority
+              quality={95}
               sizes="100vw"
               className="object-cover object-[88%_top] sm:object-[80%_8%]"
             />
