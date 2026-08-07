@@ -33,11 +33,10 @@ const WA = WA_NUTRI;
 const WA_ADS = WA_NUTRI_ADS;
 
 const heroFeatures = [
+  "Pagamento único",
+  "Sem mensalidade",
   "Design exclusivo",
-  "SEO",
-  "WhatsApp",
-  "Google Maps",
-  "Agendamento online",
+  "SEO incluso",
 ];
 
 const situations = [
@@ -223,11 +222,6 @@ export default function NutricionistasPage() {
                     <span className="text-teal">confiança</span> e conquistar{" "}
                     <span className="text-teal">novos pacientes</span>.
                   </h1>
-                  <p className="mt-8 max-w-2xl text-base leading-relaxed text-mist/55 sm:mt-9 sm:text-lg">
-                    Criamos sites e landing pages exclusivos para nutricionistas
-                    que desejam fortalecer sua presença online, aparecer melhor
-                    no Google e facilitar o contato de novos pacientes.
-                  </p>
                 </Reveal>
 
                 <Reveal delay={100}>
