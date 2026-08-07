@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Check } from "lucide-react";
+import { JsonLd } from "@/components/JsonLd";
 import { Logo } from "@/components/Logo";
 import { ProfessionalFaq } from "@/components/ProfessionalFaq";
 import { Reveal, Stagger, StaggerItem } from "@/components/Reveal";
@@ -10,6 +11,7 @@ import {
   SHARED_LANDING,
   type ProfessionalLandingConfig,
 } from "@/lib/professional-landings";
+import { SITE_NAME, SITE_URL } from "@/lib/site";
 
 function CheckItem({ children }: { children: ReactNode }) {
   return (
@@ -27,14 +29,58 @@ export function ProfessionalLanding({
 }) {
   const WA = config.wa;
   const WA_ADS = config.waAds;
+  const pageUrl = `${SITE_URL}/${config.slug}`;
   const adsCta =
     config.audienceLabel === "clientes"
       ? "Quero atrair mais clientes pelo Google"
       : "Quero atrair mais pacientes pelo Google";
   const steps = SHARED_LANDING.steps(config.stepsAudience);
+  const jsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      name: config.metadata.title,
+      description: config.metadata.description,
+      url: pageUrl,
+      inLanguage: "pt-BR",
+      isPartOf: {
+        "@type": "WebSite",
+        name: SITE_NAME,
+        url: SITE_URL,
+      },
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      name: `Sites e landing pages para ${config.pluralLabel}`,
+      description: config.metadata.description,
+      provider: {
+        "@type": "Organization",
+        name: SITE_NAME,
+        url: SITE_URL,
+        telephone: "+5511999278282",
+        email: "suporteevoluilab@gmail.com",
+      },
+      areaServed: "BR",
+      url: pageUrl,
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: config.faqs.map((item) => ({
+        "@type": "Question",
+        name: item.q,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: item.a,
+        },
+      })),
+    },
+  ];
 
   return (
     <>
+      <JsonLd data={jsonLd} />
       <header className="fixed inset-x-0 top-0 z-50 border-b border-white/5 bg-ink/85 backdrop-blur-xl">
         <div className="section-pad">
           <div className="container-site flex h-[4.5rem] items-center justify-between gap-4">
@@ -63,6 +109,7 @@ export function ProfessionalLanding({
               alt=""
               fill
               priority
+              fetchPriority="high"
               quality={95}
               sizes="100vw"
               className="object-cover object-[80%_12%] sm:object-[78%_8%]"
@@ -553,11 +600,11 @@ export function ProfessionalLanding({
               >
                 E-mail: suporteevoluilab@gmail.com
               </a>
-              <p className="mt-2 text-sm text-mist/35">Política de Privacidade</p>
-              <p className="mt-1 text-sm text-mist/35">Termos de Uso</p>
+              <p className="mt-2 text-sm text-mist/55">Política de Privacidade</p>
+              <p className="mt-1 text-sm text-mist/55">Termos de Uso</p>
             </div>
           </div>
-          <div className="container-site mt-10 border-t border-white/6 pt-6 text-xs text-mist/35">
+          <div className="container-site mt-10 border-t border-white/6 pt-6 text-xs text-mist/55">
             © {new Date().getFullYear()} EvoluiLab — Todos os direitos reservados.
           </div>
         </div>

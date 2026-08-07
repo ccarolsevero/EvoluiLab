@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -7,9 +6,10 @@ import { Logo } from "@/components/Logo";
 import { NutricionistasFaq } from "@/components/NutricionistasFaq";
 import { Reveal, Stagger, StaggerItem } from "@/components/Reveal";
 import { Button } from "@/components/ui/button";
+import { buildPageMetadata } from "@/lib/seo";
 import { WA_NUTRI, WA_NUTRI_ADS } from "@/lib/whatsapp";
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: "Sites e landing pages para nutricionistas | EvoluiLab",
   description:
     "Sites profissionais para nutricionistas que desejam transmitir confiança, aparecer melhor no Google e conquistar novos pacientes.",
@@ -20,14 +20,8 @@ export const metadata: Metadata = {
     "site nutricionista",
     "EvoluiLab",
   ],
-  openGraph: {
-    title: "Sites e landing pages para nutricionistas | EvoluiLab",
-    description:
-      "Projetos exclusivos para nutricionistas que querem confiança, presença no Google e mais pacientes.",
-    locale: "pt_BR",
-    type: "website",
-  },
-};
+  path: "/nutricionistas",
+});
 
 const WA = WA_NUTRI;
 const WA_ADS = WA_NUTRI_ADS;
@@ -202,6 +196,7 @@ export default function NutricionistasPage() {
               alt=""
               fill
               priority
+              fetchPriority="high"
               quality={95}
               sizes="100vw"
               className="object-cover object-[80%_12%] sm:object-[78%_8%]"
@@ -693,11 +688,11 @@ export default function NutricionistasPage() {
               >
                 E-mail: suporteevoluilab@gmail.com
               </a>
-              <p className="mt-2 text-sm text-mist/35">Política de Privacidade</p>
-              <p className="mt-1 text-sm text-mist/35">Termos de Uso</p>
+              <p className="mt-2 text-sm text-mist/55">Política de Privacidade</p>
+              <p className="mt-1 text-sm text-mist/55">Termos de Uso</p>
             </div>
           </div>
-          <div className="container-site mt-10 border-t border-white/6 pt-6 text-xs text-mist/35">
+          <div className="container-site mt-10 border-t border-white/6 pt-6 text-xs text-mist/55">
             © {new Date().getFullYear()} EvoluiLab — Todos os direitos reservados.
           </div>
         </div>

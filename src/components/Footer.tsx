@@ -37,9 +37,9 @@ export function Footer() {
           </div>
         </Reveal>
         <Reveal delay={80}>
-          <div className="container-site mt-12 flex flex-col gap-2 border-t border-white/6 pt-6 text-xs text-mist/30 sm:flex-row sm:justify-between">
+          <div className="container-site mt-12 flex flex-col gap-2 border-t border-white/6 pt-6 text-xs text-mist/55 sm:flex-row sm:justify-between">
             <p>© {new Date().getFullYear()} EvoluiLab. Todos os direitos reservados.</p>
-            <p className="text-teal/45">Estratégia · Tecnologia · Resultados</p>
+            <p className="text-teal/70">Estratégia · Tecnologia · Resultados</p>
           </div>
         </Reveal>
       </div>

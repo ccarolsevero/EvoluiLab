@@ -1,20 +1,15 @@
-import type { Metadata } from "next";
 import { ProfessionalLanding } from "@/components/ProfessionalLanding";
 import { requireProfessionalLanding } from "@/lib/professional-landings";
+import { buildPageMetadata } from "@/lib/seo";
 
 const config = requireProfessionalLanding("arquitetos");
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: config.metadata.title,
   description: config.metadata.description,
   keywords: config.metadata.keywords,
-  openGraph: {
-    title: config.metadata.title,
-    description: config.metadata.description,
-    locale: "pt_BR",
-    type: "website",
-  },
-};
+  path: "/arquitetos",
+});
 
 export default function ArquitetosPage() {
   return <ProfessionalLanding config={config} />;

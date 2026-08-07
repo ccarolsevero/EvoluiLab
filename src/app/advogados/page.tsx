@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -7,9 +6,10 @@ import { AdvogadosFaq } from "@/components/AdvogadosFaq";
 import { Logo } from "@/components/Logo";
 import { Reveal, Stagger, StaggerItem } from "@/components/Reveal";
 import { Button } from "@/components/ui/button";
+import { buildPageMetadata } from "@/lib/seo";
 import { WA_ADVOGADOS, WA_ADVOGADOS_ADS } from "@/lib/whatsapp";
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: "Sites e landing pages para advogados | EvoluiLab",
   description:
     "Sites profissionais para advogados e escritórios que desejam transmitir credibilidade, aparecer melhor no Google e facilitar o contato com novos clientes.",
@@ -20,14 +20,8 @@ export const metadata: Metadata = {
     "Google Ads para advogados",
     "EvoluiLab",
   ],
-  openGraph: {
-    title: "Sites e landing pages para advogados | EvoluiLab",
-    description:
-      "Projetos exclusivos para advogados e escritórios que querem credibilidade e presença no Google.",
-    locale: "pt_BR",
-    type: "website",
-  },
-};
+  path: "/advogados",
+});
 
 const WA = WA_ADVOGADOS;
 const WA_ADS = WA_ADVOGADOS_ADS;
@@ -215,6 +209,7 @@ export default function AdvogadosPage() {
               alt=""
               fill
               priority
+              fetchPriority="high"
               sizes="100vw"
               className="object-cover object-[88%_top] sm:object-[80%_8%]"
             />
@@ -701,11 +696,11 @@ export default function AdvogadosPage() {
               >
                 E-mail
               </a>
-              <p className="mt-2 text-sm text-mist/35">Política de Privacidade</p>
-              <p className="mt-1 text-sm text-mist/35">Termos de Uso</p>
+              <p className="mt-2 text-sm text-mist/55">Política de Privacidade</p>
+              <p className="mt-1 text-sm text-mist/55">Termos de Uso</p>
             </div>
           </div>
-          <div className="container-site mt-10 border-t border-white/6 pt-6 text-xs text-mist/35">
+          <div className="container-site mt-10 border-t border-white/6 pt-6 text-xs text-mist/55">
             © {new Date().getFullYear()} EvoluiLab — Todos os direitos reservados.
           </div>
         </div>
