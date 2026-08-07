@@ -25,6 +25,11 @@ export const metadata: Metadata = {
     "EvoluiLab",
     "sites para profissionais",
   ],
+  applicationName: "EvoluiLab",
+  icons: {
+    icon: [{ url: "/icon", type: "image/png" }],
+    apple: [{ url: "/apple-icon", type: "image/png" }],
+  },
   openGraph: {
     title: "EvoluiLab | Sua presença digital evolui",
     description:
