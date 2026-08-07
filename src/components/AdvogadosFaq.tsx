@@ -9,44 +9,28 @@ import {
 
 const faqs = [
   {
-    q: "Vocês desenvolvem sites apenas para advogados?",
-    a: "Somos especialistas em criar sites e landing pages para advogados e escritórios de advocacia, com projetos alinhados à imagem e às necessidades da profissão.",
+    q: "Vocês fazem só sites para advogados?",
+    a: "Sim. Somos especializados em sites e landing pages para advocacia.",
   },
   {
-    q: "Meu escritório já possui um site. Vocês fazem reformulações?",
-    a: "Sim. Podemos modernizar o visual, reorganizar o conteúdo e atualizar a estrutura do seu site.",
+    q: "Já tenho site. Vocês reformulam?",
+    a: "Sim. Modernizamos visual, conteúdo e estrutura.",
   },
   {
-    q: "Também desenvolvem landing pages para Google Ads?",
-    a: "Sim. Criamos páginas específicas para campanhas de Google Ads, pensadas para apresentar o escritório com clareza e facilitar o contato.",
+    q: "O site funciona no celular?",
+    a: "Sim. Todos os projetos são responsivos.",
   },
   {
-    q: "Meu site funcionará no celular?",
-    a: "Sim. Todos os projetos são desenvolvidos para funcionar bem em computadores, tablets e smartphones.",
-  },
-  {
-    q: "Posso integrar WhatsApp ao site?",
-    a: "Sim. O WhatsApp pode ser integrado para facilitar o contato de quem deseja falar com o escritório.",
-  },
-  {
-    q: "Meu site poderá aparecer no Google?",
-    a: "Desenvolvemos os projetos seguindo boas práticas de SEO para facilitar a indexação e fortalecer a presença nas buscas.",
-  },
-  {
-    q: "Posso publicar artigos jurídicos?",
-    a: "Sim. Podemos desenvolver uma área de conteúdo para o escritório publicar artigos e materiais informativos.",
+    q: "Dá para integrar WhatsApp e SEO?",
+    a: "Sim. Incluímos WhatsApp e boas práticas de SEO.",
   },
   {
     q: "Vocês fazem Google Ads?",
-    a: "Sim. Além do site, também desenvolvemos campanhas de Google Ads para escritórios que desejam fortalecer a presença nas pesquisas.",
+    a: "Sim. Também criamos campanhas e landing pages para Ads.",
   },
   {
-    q: "Quanto tempo leva para o site ficar pronto?",
-    a: "O prazo depende da estrutura do projeto e será informado após entendermos suas necessidades.",
-  },
-  {
-    q: "Quanto custa?",
-    a: "Cada projeto é personalizado. Entre em contato para receber uma proposta adequada ao seu escritório.",
+    q: "Quanto custa e quanto tempo leva?",
+    a: "Cada projeto é sob medida. Envie uma mensagem e montamos a proposta com prazo.",
   },
 ];
 
